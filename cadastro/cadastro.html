@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../cadastro/cadastro.css">
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="cadastro.js"></script>
+    <title>e-commerce cadastration</title>
+</head>
+
+<body>
+    <div class="form-box">
+        <form class="form" method="post" id='formdata'>
+            <span class="title">Sign up</span>
+            <span class="subtitle">Crie uma conta gratis com seu email.</span>
+            <div class="form-container">
+                <input type="text" class="input" placeholder="Nome completo" id="nome" autocomplete="off" name="nome">
+                <input type="email" class="input" placeholder="Email" id="email" name="email">
+                <input type="password" class="input" placeholder="Senha" id="senha" autocomplete="off" name="senha">
+                <input type="text" class="input" placeholder="CPF" id="cpf" maxlength="11" minlength="11" name="cpf">
+            </div>
+            <button type="button" onclick="calvo()">Sign up</button>
+        </form>
+        <div class="form-section">
+            <p>Ja tem uma conta? <a href="../login/login.html">Log in</a> </p>
+        </div>
+    </div>
+</body>
+</html>
