@@ -1,11 +1,10 @@
-// This function fetches data from the '/revenue' endpoint using XMLHttpRequest
+// This function fetches data from the '/revenue (placeholder)' endpoint using XMLHttpRequest
 function fetchData(callback) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '/revenue', true);
     xhr.responseType = 'json';
     
     xhr.onload = function() {
-        // Check for successful response
         if (xhr.status === 200) {
             callback(null, xhr.response);
         } else {
@@ -20,20 +19,17 @@ function fetchData(callback) {
     xhr.send();
 }
 
-// This function takes in the data fetched and renders a line chart using Chart.js
 function renderChart(data) {
-    // Extract month and revenue data for the graph
     const months = data.map(item => item.month);
     const revenues = data.map(item => item.revenue);
 
-    // Get the canvas context and instantiate a new chart
     const ctx = document.getElementById('revenueChart').getContext('2d');
     new Chart(ctx, {
         type: 'line',
         data: {
             labels: months,      // X-axis labels
             datasets: [{
-                label: 'Monthly Revenue',  // Dataset label
+                label: 'Monthly Revenue',  
                 data: revenues,  // Y-axis data points
                 borderColor: 'blue',
                 fill: false
@@ -61,3 +57,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+// Actual database info and php implementation needs to be applied code currently a WIP and will not work.

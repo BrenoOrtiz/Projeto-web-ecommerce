@@ -22,3 +22,4 @@ echo json_encode($data);
 $conn->close();
 ?>
 
+// As seen in graph.js this currently shows a WIP and will not work as there are placeholders in the code for the db info.
