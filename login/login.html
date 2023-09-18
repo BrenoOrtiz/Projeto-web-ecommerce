@@ -5,22 +5,24 @@
     <meta charset="UTF-8">
     <title>e-commerce login</title>
 </head>
+<script type="text/javascript" src="login.js"></script>
 <body>
-    <form class="form" action="login.php" method="post">
-        <form class="form">
+    <div id="circle1" class="circles"></div>
+    <div id="circle2" class="circles"></div>
+    <div id="circle3" class="circles"></div>
+    <div class="form-box">
+        <form class="form" method="post" id='formdata'>
             <span class="title">Login</span>
-            <span class="subtitle">Preencha os campos abaixos para logar em sua conta </span>
-                <div class="form-container" action="cadastro.php" method="post">
-                            <input type="email" class="input" placeholder="Email" id="email">
-                            <input type="senha" class="input" placeholder="Senha" id="senha" autocomplete="off">
-                    </div>
-                    <button>Sign up</button>
-                </form>
-                <div class="form-section">
-                  <p>Nao tem uma conta? <a href="../cadastro/cadastro.html">Cadastro</a> </p>
-                </div>
-                </div>
+            <span class="subtitle">Preencha os campos abaixos para logar em sua conta.</span>
+            <div class="form-container">
+                <input type="email" class="input" placeholder="Email" id="email" name="email">
+                <input type="password" class="input" placeholder="Senha" id="senha" autocomplete="off" name="senha">
+            </div>
+            <button type="button" onclick="calvo()">Sign up</button>
         </form>
+        <div class="form-section">
+            <p>Nao tem uma conta? <a href="../cadastro/cadastro.html">Cadastro</a> </p>
+        </div>
     </div>
 </body>
 </html>

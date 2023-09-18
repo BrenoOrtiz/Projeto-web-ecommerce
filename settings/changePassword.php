@@ -1,10 +1,10 @@
 <?php
 header('Content-Type: application/json');
 
-$host = 'localhost';  
-$db   = 'yourDatabase';  
-$user = 'yourUsername';       
-$pass = 'yourPassword';  
+$servername = "localhost";
+$username = "root";
+$password = "suasenha";
+$database = "ecommerce";
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

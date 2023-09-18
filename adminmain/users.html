@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../graph/graph.js"></script>
+    <script src="allmain.js"></script>    
+    <link rel="stylesheet" href="allmain.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">BoaoJuice</div>
+        <div class="right-icons">
+            <div class="sidebar-toggle" onclick="toggleSidebar()">≡</div>
+            <div class="user-icon" onclick="toggleDropdown()">U</div>
+            <div class="dropdown">
+                <a href="#">Settings</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </header>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <ul>
+                <li><a href="main.html">Overview</a></li>
+                <li><a href="sales.html">Sales</a></li>
+                <li><a href="users.php" class="active">Users</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <h1>Users</h1>
+            <div class="sorting">
+                <a href="users.php?sort=name">Sort by Name</a> |
+                <a href="users.php?sort=purchases">Sort by Amount of Purchases</a> |
+                <a href="users.php?sort=id">Sort by ID</a>
+            </div>
+
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Purchases</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
