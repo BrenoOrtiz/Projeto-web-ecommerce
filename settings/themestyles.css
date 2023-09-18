@@ -1,0 +1,26 @@
+/* Light theme */
+.theme-light {
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* Dark theme */
+.theme-dark {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Cherry blossom theme */
+.theme-cherry-blossom {
+    background-color: #FFB7C5;
+    color: #6B3E26;
+}
+
+/* Navy blue theme */
+.theme-navy-blue {
+    background-color: #001F3F;
+    color: #FFF;
+}
+
+
+/*faz a boa ai mano front end*/

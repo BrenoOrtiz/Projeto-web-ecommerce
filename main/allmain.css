@@ -1,0 +1,151 @@
+:root {
+    --primary-100: #1A237E;
+    --primary-200: #534bae;
+    --primary-300: #b8a6ff;
+    --accent-100: #1565C0;
+    --accent-200: #cbf5ff;
+    --text-100: #FFFFFF;
+    --text-200: #e0e0e0;
+    --bg-100: #0F1C3F;
+    --bg-200: #212b50;
+    --bg-300: #3b426a;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-100);
+    color: var(--text-100);
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: var(--primary-100);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    width: 100%;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header .right-icons {
+    display: flex;
+    align-items: center;
+}
+
+header .user-icon,
+header .sidebar-toggle {
+    background-color: var(--accent-200);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.wrapper {
+    display: flex;
+}
+
+nav {
+    width: 200px;
+    height: 100vh;
+    background-color: var(--bg-200);
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s;
+}
+
+nav.closed {
+    width: 0;
+    overflow: hidden;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    padding: 15px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text-100);
+    display: block;
+}
+
+nav ul li a:hover {
+    background-color: var(--primary-200);
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+.content .statistics {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content .statistics div {
+    flex-basis: 30%;
+    padding: 20px;
+    background-color: var(--bg-300);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.content .statistics div .graph-placeholder {
+    width: 90%;
+    height: 200px;
+    background-color: var(--primary-300);
+    border-radius: 10px;
+    margin-top: 20px;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.content .statistics div .graph-placeholder canvas {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Dropdown styles */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: var(--bg-300);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--text-100);
+    text-decoration: none;
+}
+
+.dropdown a:hover {
+    background-color: var(--primary-200);
+}

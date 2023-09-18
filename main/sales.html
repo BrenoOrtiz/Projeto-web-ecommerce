@@ -1,19 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../graph/graph.js"></script>
-    <script src="allmain.js"></script>    
+    <script src="allmain.js"></script>
     <link rel="stylesheet" href="allmain.css">
 </head>
 
 <body>
     <header>
-        <div class="logo">BoaoJuice</div>
+        <div class="logo">
+        <div class="sales-section"><h2 string="Sales Table"></h2><table class="sales-table"><thead><tr><th>Date</th><th>Price</th><th>Customer</th><th>Details</th></tr></thead></table></div></div>
         <div class="right-icons">
             <div class="sidebar-toggle" onclick="toggleSidebar()">≡</div>
             <div class="user-icon" onclick="toggleDropdown()">U</div>
@@ -30,31 +28,26 @@
                 <li><a href="sales.html">Sales</a></li>
                 <li><a href="users.html">Users</a></li>
                 <li><a href="settings.html">Settings</a></li>
-                
             </ul>
         </nav>
         <div class="content">
             <h1>Welcome to BoaoJuice Admin Dashboard</h1>
-            <div class="statistics">
-                <div>
-                    <h3>Earnings</h3>
-                    <p>$XXXX.XX</p>
-                </div>
-                <div>
-                    <h3>Total Order</h3>
-                    <p>$XXXX.XX</p>
-                </div>
-                <div>
-                    <h3>Monthly Revenue</h3>
-                    <div class="graph-placeholder"></div>
-                        <canvas id="revenueChart" width="400" height="200"></canvas>
-                </div>
-            </div>
+        </div>
+        
+        <div class="sales-section">
+            <h2>Sales Table</h2>
+            <table class="sales-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Customer</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
 </body>
 
 </html>
-
-
-<!--tudo contido na area principal esta sendo deixado como placeholder-->

@@ -18,14 +18,14 @@ try {
 
     $stmt = $pdo->prepare('SELECT COUNT(*) as count FROM users WHERE email = :email  AND senha = :senha');
     $stmt->execute(['email' => $email, 'senha' => $senha]);
-    
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($result['count'] > 0) {
-        echo json_encode(["success" => true]);
+        header("Location: ../main/main.html");
+        exit; 
     } else {
-        echo json_encode(["success" => false]);
+        echo "Login failed. Please try again.";
     }
-
 } catch (PDOException $e) {
-    echo json_encode(['error' => $e->getMessage()]);
+    echo "Database Error: " . $e->getMessage();
 }
 ?>
