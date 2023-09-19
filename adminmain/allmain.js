@@ -1,6 +1,16 @@
 function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
+    var image = document.getElementById('menu-icon');
+    var sidebar = document.getElementById('sidebar');
+
     sidebar.classList.toggle('closed');
+    
+    if (sidebar.classList.contains('closed')) {
+        image.src = "icons/close.png";
+    }
+    else {
+        image.src = "icons/menu.png";
+    }
+    
 }
 
 function toggleDropdown() {

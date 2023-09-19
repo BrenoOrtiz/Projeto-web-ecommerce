@@ -10,11 +10,10 @@
 
 <body>
     <header>
-        <div class="logo">
-        <div class="sales-section"><h2 string="Sales Table"></h2><table class="sales-table"><thead><tr><th>Date</th><th>Price</th><th>Customer</th><th>Details</th></tr></thead></table></div></div>
+        <div class="logo">BoaoJuice</div>
         <div class="right-icons">
-            <div class="sidebar-toggle" onclick="toggleSidebar()">≡</div>
-            <div class="user-icon" onclick="toggleDropdown()">U</div>
+            <img  alt="menu-icon-svg" src="icons/menu.png" height="32px" width="32px" id="menu-icon" class="sidebar-toggle" onclick="toggleSidebar()"><img>
+            <img alt="close-icon-svg" src="icons/user.png" height="32px" width="32px" class="user-icon" onclick="toggleDropdown()"></img>
             <div class="dropdown">
                 <a href="#">Settings</a>
                 <a href="#">Logout</a>
@@ -24,10 +23,18 @@
     <div class="wrapper">
         <nav id="sidebar">
             <ul>
-                <li><a href="main.html">Overview</a></li>
-                <li><a href="sales.html">Sales</a></li>
-                <li><a href="users.html">Users</a></li>
-                <li><a href="settings.html">Settings</a></li>
+                <li>
+                    <img src="icons/overview.png" alt="" height="30px" width="30px">
+                    <a href="main.html">Overview</a></li>
+                <li>
+                    <img src="icons/sales.png" alt="" height="30px" width="30px">
+                    <a href="sales.html">Sales</a></li>
+                <li>
+                    <img src="icons/users.png" alt="" height="30px" width="30px">
+                    <a href="users.html">Users</a></li>
+                <li>
+                    <img src="icons/settings.png" alt="" height="30px" width="30px">
+                    <a href="settings.html">Settings</a></li>
             </ul>
         </nav>
         <div class="content">
