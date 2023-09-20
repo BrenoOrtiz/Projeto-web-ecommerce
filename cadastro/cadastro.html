@@ -14,16 +14,20 @@
     <div id="circle2" class="circles"></div>
     <div id="circle3" class="circles"></div>
     <div class="form-box">
-        <form class="form" method="post" id='formdata'>
+        <form class="form" method="post" id='form'>
             <span class="title">Sign up</span>
             <span class="subtitle">Crie uma conta gratis com seu email.</span>
             <div class="form-container">
-                <input type="text" class="input" placeholder="Nome completo" id="nome" autocomplete="off" name="nome">
-                <input type="email" class="input" placeholder="Email" id="email" name="email">
-                <input type="password" class="input" placeholder="Senha" id="senha" autocomplete="off" name="senha">
-                <input type="text" class="input" placeholder="CPF" id="cpf" maxlength="11" minlength="11" name="cpf">
+                <input type="text" oninput="update(this)" class="input" placeholder="Nome completo" id="nome" autocomplete="off" name="nome" data-erro="erro-nome">
+                <span class="erro" id="erro-nome"></span>
+                <input type="email" oninput="update(this)" class="input" placeholder="Email" id="email" name="email" data-erro="erro-email">
+                <span class="erro" id="erro-email"></span>
+                <input type="password" oninput="update(this)" class="input" placeholder="Senha" id="senha" autocomplete="off" name="senha" data-erro="erro-senha">
+                <span class="erro" id="erro-senha"></span>
+                <input type="text" oninput="update(this)" class="input" placeholder="CPF" id="cpf" maxlength="11" minlength="11" name="cpf" data-erro="erro-cpf">
+                <span class="erro" id="erro-cpf"></span>
             </div>
-            <button type="button" onclick="calvo()">Sign up</button>
+            <button type="button" onclick="cadastrar()">Sign up</button>
         </form>
         <div class="form-section">
             <p>Ja tem uma conta? <a href="../login/login.html">Log in</a> </p>

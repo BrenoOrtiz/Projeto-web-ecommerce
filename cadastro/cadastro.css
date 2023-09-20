@@ -52,7 +52,6 @@ body {
     background: rgba( 255, 255, 255, 0.15 );
     backdrop-filter: blur( 8px );
     -webkit-backdrop-filter: blur( 8px );
-    overflow: hidden;
     border-radius: 16px;
     color: #fff;
   
@@ -79,7 +78,7 @@ body {
   
   /*Inputs box*/
   .form-container {
-    overflow: hidden;
+    position: relative;
     border-radius: 8px;
     background-color: #fff;
     margin: 1rem 0 .5rem;
@@ -88,14 +87,46 @@ body {
   
   .input {
     background: none;
+    border-radius: 8px;
+    width: 222px;
     border: none;
     outline: 0;
     height: 40px;
-    width: 100%;
     font-size: .9rem;
     padding: 8px 15px;
   }
-  
+
+  .erro{
+    position: absolute;
+    border-radius: 4px 4px 4px 0;
+    display: none;
+    height: 20px;
+    padding: 8px;
+    background-color: #FF6347;
+    white-space: nowrap;
+    font-size: 16px;
+  }
+
+  #erro-nome{
+    top: 0px;
+    left: 220px;
+  }
+
+  #erro-email{
+    top: 60px;
+    left: 220px;
+  }
+
+  #erro-senha{
+    top: 120px;
+    left: 220px;
+  }
+
+  #erro-cpf{
+    top: 180px;
+    left: 220px;
+  }
+
   .form-section {
     padding: 16px;
     font-size: .85rem;
@@ -174,3 +205,13 @@ body {
     }
   }
   
+  @keyframes erro {
+    from{
+      opacity: 0;
+      transform: translateX(25px);
+    }
+    to{
+      opacity: 100%;
+      transform: translateX(0px);
+    }
+  }
