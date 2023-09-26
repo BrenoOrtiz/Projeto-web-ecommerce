@@ -5,7 +5,8 @@ async function cadastrar() {
 
     // Validando se campos estão vazios
     inputs.forEach((input) => {
-        if (input.value == "") {
+        input.value = input.value.trimStart()
+        if (input.value.length == 0) {
             isvalid = false;
         }
     })
@@ -22,8 +23,7 @@ async function cadastrar() {
             inputNome.style.outline = "1px solid #FF6347";
             isvalid = false;
         }
-        // Removendo espaços no começo e fim da string e duplos ou maiores no campo nome
-        inputNome.value = inputNome.value.trimStart();
+        // Removendo espaços no fim da string e duplos ou maiores no campo nome
         inputNome.value = inputNome.value.replace(/ +/g, " ");
         inputNome.value = inputNome.value.trimEnd();
 
@@ -38,8 +38,7 @@ async function cadastrar() {
             inputEmail.style.outline = "1px solid #FF6347";
             isvalid = false;
         }
-        // Removendo os espaços no começo e fim do campo email
-        inputEmail.value = inputEmail.value.trimStart();
+        // Removendo os espaços no fim do campo email
         inputEmail.value = inputEmail.value.trimEnd();
         
         //Validando campo senha
@@ -53,8 +52,7 @@ async function cadastrar() {
             inputSenha.style.outline = "1px solid #FF6347";
             isvalid = false;
         }
-        // Removendo os espaços no começo e fim do campo senha
-        inputSenha.value = inputSenha.value.trimStart();
+        // Removendo os espaços no fim do campo senha
         inputSenha.value = inputSenha.value.trimEnd();
 
         // Validando campo CPF
@@ -68,32 +66,30 @@ async function cadastrar() {
             inputCPF.style.outline = "1px solid #FF6347";
             isvalid = false;
         }
-        //Removendo os espaços no começo do campo CPF
-        inputCPF.value = inputCPF.value.trimStart();
-        
+    } else {
+        document.querySelector('.form-container').style.outline = "1px solid #FF6347";
+        var mensagem_erro = document.getElementById('mensagem-erro');
+        mensagem_erro.style.display = "inline";
+        mensagem_erro.style.animation = "erro 1s ease";
     }
     
-    async function cadastrar() {
+    if (isvalid) {
         var formulario = document.getElementById("form");
         var dados = new FormData(formulario);
         await fetch('cadastro.php', {
             method: 'POST',
             body: dados
         });
-        // server response here (if needed)
     }
-    
-    if (isvalid) {
-        cadastrar();
-    }
-    
-    
+       
 }
 
 function update(input) { 
     // função que retira o display de erro de validação quando algo é digitado no input
     input.style.outline = "none";
     var id_display_erro = input.getAttribute('data-erro');
-    var erro_display = document.getElementById(id_display_erro)
-    erro_display.style.display = "none";
+    document.querySelector('.form-container').style.outline = "none";
+    document.getElementById('mensagem-erro').style.display = "none";
+    document.getElementById(id_display_erro).style.display = "none";
+      
 }
