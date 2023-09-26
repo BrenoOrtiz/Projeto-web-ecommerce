@@ -1,0 +1,136 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema ecommerce
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema ecommerce
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `ecommerce` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `ecommerce` ;
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`admin`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecommerce`.`admin` (
+  `admin_id` INT NOT NULL AUTO_INCREMENT,
+  `admin_nome` VARCHAR(45) NOT NULL,
+  `admin_senha` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`admin_id`),
+  UNIQUE INDEX `admin_name_UNIQUE` (`admin_nome` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`categorias`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecommerce`.`categorias` (
+  `categoria_id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(255) NOT NULL,
+  `descricao` TEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`categoria_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`usuarios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecommerce`.`usuarios` (
+  `usuario_id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `senha` VARCHAR(255) NOT NULL,
+  `cpf` VARCHAR(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`usuario_id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`pedidos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecommerce`.`pedidos` (
+  `pedido_id` INT NOT NULL AUTO_INCREMENT,
+  `usuario_id` INT NOT NULL,
+  `data_pedido` DATETIME NOT NULL,
+  `status_pedido` VARCHAR(50) NOT NULL,
+  `valor_pedido` DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (`pedido_id`),
+  INDEX `usuario_id` (`usuario_id` ASC) VISIBLE,
+  CONSTRAINT `pedidos_ibfk_1`
+    FOREIGN KEY (`usuario_id`)
+    REFERENCES `ecommerce`.`usuarios` (`usuario_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`produtos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecommerce`.`produtos` (
+  `produto_id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(255) NOT NULL,
+  `descricao` TEXT NULL DEFAULT NULL,
+  `preco` DECIMAL(10,2) NOT NULL,
+  `estoque` INT NOT NULL,
+  PRIMARY KEY (`produto_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`detalhes_pedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecommerce`.`detalhes_pedido` (
+  `detalhe_id` INT NOT NULL AUTO_INCREMENT,
+  `pedido_id` INT NOT NULL,
+  `produto_id` INT NOT NULL,
+  `quantidade` INT NOT NULL,
+  `preco_unitario` DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (`detalhe_id`),
+  INDEX `pedido_id` (`pedido_id` ASC) VISIBLE,
+  INDEX `produto_id` (`produto_id` ASC) VISIBLE,
+  CONSTRAINT `detalhes_pedido_ibfk_1`
+    FOREIGN KEY (`pedido_id`)
+    REFERENCES `ecommerce`.`pedidos` (`pedido_id`),
+  CONSTRAINT `detalhes_pedido_ibfk_2`
+    FOREIGN KEY (`produto_id`)
+    REFERENCES `ecommerce`.`produtos` (`produto_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`produtos_categorias`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecommerce`.`produtos_categorias` (
+  `produto_id` INT NOT NULL,
+  `categoria_id` INT NOT NULL,
+  PRIMARY KEY (`produto_id`, `categoria_id`),
+  INDEX `categoria_id` (`categoria_id` ASC) VISIBLE,
+  CONSTRAINT `produtos_categorias_ibfk_1`
+    FOREIGN KEY (`produto_id`)
+    REFERENCES `ecommerce`.`produtos` (`produto_id`),
+  CONSTRAINT `produtos_categorias_ibfk_2`
+    FOREIGN KEY (`categoria_id`)
+    REFERENCES `ecommerce`.`categorias` (`categoria_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;

@@ -1,11 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
-$servername = "localhost";
-$username = "root";
-$password = "suasenha";
-$database = "ecommerce"; 
-$charset = 'utf8mb4';
+$config = parse_ini_file('C:\Users\joaov\OneDrive\Área de Trabalho\webecommerce ini\database_config.ini');
+$servername = $config['server'];
+$username = $config['username'];
+$password = $config['password'];
+$dbname = $config['dbname'];
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [

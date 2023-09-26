@@ -73,15 +73,21 @@ async function cadastrar() {
         
     }
     
-
-    /*
-    var formulario = document.getElementById("form");
-    var dados = new FormData(formulario);
-    await fetch('cadastro.php', {
-        method: 'POST',
-        body: dados
-    });
-    */
+    async function cadastrar() {
+        var formulario = document.getElementById("form");
+        var dados = new FormData(formulario);
+        await fetch('cadastro.php', {
+            method: 'POST',
+            body: dados
+        });
+        // server response here (if needed)
+    }
+    
+    if (isvalid) {
+        cadastrar();
+    }
+    
+    
 }
 
 function update(input) { 
