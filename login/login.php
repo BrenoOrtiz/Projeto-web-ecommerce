@@ -1,8 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "suasenha";
-$dbname = "ecommerce";
+$config = parse_ini_file('C:\Users\joaov\OneDrive\Área de Trabalho\webecommerce ini\database_config.ini');
+$servername = $config['server'];
+$username = $config['username'];
+$password = $config['password'];
+$dbname = $config['dbname'];
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if (!isset($_POST["email"]) || !isset($_POST["senha"])) {
