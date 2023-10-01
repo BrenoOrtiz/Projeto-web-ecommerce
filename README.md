@@ -1,7 +1,3 @@
-Obrigado por enviar todos os 23 arquivos. Agora vou continuar a escrever a documentação no README baseado nos arquivos enviados.
-
----
-
 # Projeto web ecommerce por Joao Vitor Ishikawa Onofrio e Breno Ortiz David
 
 Projeto criado com o intuito de satisfazer os requerimentos da aula de WebDev do 2º período de bacharelado de Ciência da Computação.
