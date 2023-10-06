@@ -76,7 +76,7 @@ async function cadastrar() {
     if (isvalid) {
         var formulario = document.getElementById("form");
         var dados = new FormData(formulario);
-        await fetch('cadastro.php', {
+        await fetch('php/cadastro.php', {
             method: 'POST',
             body: dados
         });
