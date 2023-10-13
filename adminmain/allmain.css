@@ -162,7 +162,7 @@ nav ul li a:hover {
 }
 
 /* should be placed elsewhere later*/
-.card-container {
+#card-container {
     display: flex;    
     flex-wrap: wrap;    
     gap: 20px;          
