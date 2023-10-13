@@ -76,6 +76,11 @@ body {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.7);
   }
+
+  #mensagem-erro{
+    color: #FF6347;
+    font-size: 1rem;
+  }
   
   /*Inputs box*/
   .form-container {
