@@ -1,5 +1,5 @@
 <?php
-$connection = mysqli_connect('localhost', 'root', 'senha', 'ecommerce');  
+$connection = mysqli_connect('localhost', 'root', 'jv200405', 'ecommerce');  
 
 if (!$connection){
     echo "Connection error: " . mysqli_connect_error();

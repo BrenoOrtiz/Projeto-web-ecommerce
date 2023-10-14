@@ -1,24 +1,42 @@
+let discountPercentage = 0;
+let deliveryPrice = 5;
+
 document.addEventListener('DOMContentLoaded', function() {
     loadCart();
-    attachInputListeners();
+    attachListeners(); 
 });
 
 function loadCart() {
     const cartProducts = JSON.parse(localStorage.getItem('cart')) || [];
     const container = document.getElementById('container-povo');
-    container.innerHTML = '';
+    container.innerHTML = cartProducts.map(createCartItem).join('');
 
-    let totalPrice = 0;
+    updateTotalWithDelivery();
+}
 
-    cartProducts.forEach((product) => {
-        totalPrice += parseFloat(product.preco) * (product.quantity || 1);
-        const productElement = createCartItem(product);
-        container.innerHTML += productElement;
-    });
+function attachListeners() {
+    const deliveryDropdown = document.querySelector('.select');
+    const couponButton = document.getElementById('coupon-button');
 
-    // Update total price and item count
-    updateTotalPrice();
-    document.getElementById('total-items').textContent = `items ${cartProducts.length}`;
+    deliveryDropdown.addEventListener('change', updateTotalWithDelivery);
+    couponButton.addEventListener('click', applyCoupon);
+}
+
+function applyCoupon() {
+    const couponInput = document.getElementById('coupon-input');
+    const couponCode = couponInput.value.trim();
+
+    console.log('Entered Coupon Code:', couponCode);
+
+    if (couponCode === 'BOAOJUICEBRABO10') {
+        discountPercentage = 10; 
+        updateTotalWithDelivery();
+        alert('Coupon applied successfully!');
+    } else {
+        alert('Invalid coupon code. Please try again.');
+    }
+
+    couponInput.value = '';
 }
 
 function createCartItem(product) {
@@ -31,64 +49,71 @@ function createCartItem(product) {
                 <h6 class="text-muted">${product.nome}</h6>
                 <h6 class="text-black mb-0">${product.descricao}</h6>
             </div>
-            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+            <div class="col-md-3 col-lg-3 col-xl-2 d-flex" style="align-items: center;">
+                <button class="btn btn-link px-2" onclick="adjustQuantity('${product.nome}', 'decrease')">
                     <i class="fas fa-minus"></i>
                 </button>
-                <input id="form1" data-nome="${product.nome}" data-preco="${product.preco}" min="0" name="quantity" value="${product.quantity || 1}" type="number" class="form-control form-control-sm" />
-                <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                <span id="quantity-${product.nome}" class="product-quantity">${product.quantity || 1}</span>
+                <button class="btn btn-link px-2" onclick="adjustQuantity('${product.nome}', 'increase')">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                 <h6 class="mb-0">€ ${product.preco}</h6>
             </div>
-            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+            <div class="icon">
+                <a href="#!" onclick="event.preventDefault(); removeFromCart('${product.nome}');" class="text-muted"><i class="fas fa-times"></i></a>
             </div>
         </div>
     `;
 }
 
-function attachInputListeners() {
-    const quantityInputs = document.querySelectorAll('input[name="quantity"]');
-    quantityInputs.forEach(input => {
-        input.addEventListener('change', function() {
-            const productNome = input.getAttribute('data-nome');
-            const productPrice = parseFloat(input.getAttribute('data-preco'));
-            const quantity = parseInt(input.value);
+function adjustQuantity(productNome, action) {
+    const span = document.getElementById(`quantity-${productNome}`);
+    const currentQuantity = parseInt(span.textContent);
 
-            // Update the local storage
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const updatedCart = cart.map(product => {
-                if (product.nome === productNome) {
-                    product.quantity = quantity;
-                }
-                return product;
-            });
-            localStorage.setItem('cart', JSON.stringify(updatedCart));
+    let newQuantity = (action === 'decrease') ? currentQuantity - 1 : currentQuantity + 1;
+    if (newQuantity < 0) newQuantity = 0;
 
-            // Update the displayed total price
-            updateTotalPrice();
-        });
+    span.textContent = newQuantity;
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const updatedCart = cart.map(product => {
+        if (product.nome === productNome) {
+            product.quantity = newQuantity;
+        }
+        return product;
     });
+
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    loadCart();
 }
 
-
-function updateTotalPrice() {
+function removeFromCart(productNome) {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let totalPrice = 0;
-    let totalItems = 0; 
+    const updatedCart = cart.filter(product => product.nome !== productNome);
     
-    cart.forEach(product => {
-        const productQuantity = product.quantity || 1;
-        totalPrice += parseFloat(product.preco) * productQuantity;
-        totalItems += productQuantity;
-    });
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    loadCart();
+}
 
-    // Update the displayed total price and item count
+function updateTotalWithDelivery() {
+    const selectElement = document.querySelector('.select');
+    const selectedOption = selectElement.options[selectElement.selectedIndex].text;
+    const deliveryPriceMatch = selectedOption.match(/€([\d,]+(\.\d{2})?)/);
+     
+    if (deliveryPriceMatch) {
+        deliveryPrice = parseFloat(deliveryPriceMatch[1].replace(',', ''));
+    }
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalPrice = cart.reduce((total, product) => total + parseFloat(product.preco) * (product.quantity || 1), deliveryPrice);
+
+    const discountAmount = totalPrice * (discountPercentage / 100);
+    totalPrice -= discountAmount;
+
+    document.getElementById('discount-value').textContent = `€ ${discountAmount.toFixed(2)}`;
     document.getElementById('total-price').textContent = `€ ${totalPrice.toFixed(2)}`;
-    document.getElementById('total-items').textContent = `items ${totalItems}`;
+    document.getElementById('total-items').textContent = `items ${cart.reduce((sum, product) => sum + (product.quantity || 1), 0)}`;
     document.getElementById('item-count').textContent = `${cart.length} items`;  
 }
-
