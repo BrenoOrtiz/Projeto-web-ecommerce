@@ -1,6 +1,6 @@
 window.onload = async function fetchDataAndRender() {
     try {
-        const response = await fetch('usermain.php', {
+        const response = await fetch('php/index.php', {
             method: 'GET',
         });
 
@@ -38,6 +38,7 @@ function createProductCard(product) {
                 <p class="text-title">${product.nome}</p>
                 <p class="text-body">${product.descricao}</p>
             </div>
+            <hr>
             <div class="card-footer">
                 <span class="text-title">$${product.preco}</span>
                 <div class="card-button">
