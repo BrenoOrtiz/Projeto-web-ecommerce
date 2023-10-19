@@ -52,6 +52,8 @@ window.onload = async function () {
     
     var search_input = document.getElementById('search-input');
         search_input.addEventListener('input', async () => {
+            
+            var suggestions = document.getElementsByClassName('suggest-options');
             var form = document.getElementById('form');
             var dados = new FormData(form);
 
@@ -69,6 +71,11 @@ window.onload = async function () {
                 const conteudo = createProductCard(produto);
                 container.innerHTML += conteudo;
             })
+
+            for (var i = 0; i < suggestions.length; i++){
+                suggestions[i].value = produtos[i].nome;
+            }
+
         })
     
     
