@@ -1,35 +1,7 @@
-window.onload = async function fetchDataAndRender() {
-    try {
-        const response = await fetch('php/index.php', {
-            method: 'GET',
-        });
-
-        const dados = await response.json();
-        const container = document.getElementById('card-container');
-        container.innerHTML = '';
-
-        dados.forEach((dado) => {
-            const conteudo = createProductCard(dado);
-            container.innerHTML += conteudo;
-        });
-
-        // Attach the event listener to SVG icons directly
-        const svgButtons = document.querySelectorAll('.svg-icon');
-        
-        svgButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Get product data from the grandparent (the card)
-                addToCart(button.parentNode.parentNode.parentNode);
-            });
-        });
-
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-}
-
-function createProductCard(product) {
-    return `
+window.onload = async function () {
+    
+    function createProductCard(product) {
+        return `
         <div class="card" data-nome="${product.nome}" data-imagem="${product.imagem}" data-descricao="${product.descricao}" data-preco="${product.preco}">
             <div class="card-img">
                 <img src="${product.imagem}" alt="${product.nome}" height="100%" width="100%">
@@ -41,30 +13,85 @@ function createProductCard(product) {
             <hr>
             <div class="card-footer">
                 <span class="text-title">$${product.preco}</span>
-                <div class="card-button">
-                        <svg class="svg-icon" viewBox="0 0 20 20" data-href="shoppingcart.html">
-                        <path d="M17.72,5.011H8.026c-0.271,0-0.49,0.219-0.49,0.489c0,0.271,0.219,0.489,0.49,0.489h8.962l-1.979,4.773H6.763L4.935,5.343C4.926,5.316,4.897,5.309,4.884,5.286c-0.011-0.024,0-0.051-0.017-0.074C4.833,5.166,4.025,4.081,2.33,3.908C2.068,3.883,1.822,4.075,1.795,4.344C1.767,4.612,1.962,4.853,2.231,4.88c1.143,0.118,1.703,0.738,1.808,0.866l1.91,5.661c0.066,0.199,0.252,0.333,0.463,0.333h8.924c0.116,0,0.22-0.053,0.308-0.128c0.027-0.023,0.042-0.048,0.063-0.076c0.026-0.034,0.063-0.058,0.08-0.099l2.384-5.75c0.062-0.151,0.046-0.323-0.045-0.458C18.036,5.092,17.883,5.011,17.72,5.011z"></path>
-                        <path d="M8.251,12.386c-1.023,0-1.856,0.834-1.856,1.856s0.833,1.853,1.856,1.853c1.021,0,1.853-0.83,1.853-1.853S9.273,12.386,8.251,12.386z M8.251,15.116c-0.484,0-0.877-0.393-0.877-0.874c0-0.484,0.394-0.878,0.877-0.878c0.482,0,0.875,0.394,0.875,0.878C9.126,14.724,8.733,15.116,8.251,15.116z"></path>
-                        <path d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"></path>
-                        </svg>
+                <div class="card-button">    
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0" data-href="shoppingcart.html">
+                </g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Shopping_Cart_01"> <path id="Vector" d="M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM17 17H9.29395C8.83288 17 8.60193 17 8.41211 16.918C8.24466 16.8456 8.09938 16.7291 7.99354 16.5805C7.8749 16.414 7.82719 16.1913 7.73274 15.7505L5.27148 4.26465C5.17484 3.81363 5.12587 3.58838 5.00586 3.41992C4.90002 3.27135 4.75477 3.15441 4.58732 3.08205C4.39746 3 4.16779 3 3.70653 3H3M6 6H18.8732C19.595 6 19.9555 6 20.1978 6.15036C20.41 6.28206 20.5653 6.48862 20.633 6.729C20.7104 7.00343 20.611 7.34996 20.411 8.04346L19.0264 12.8435C18.9068 13.2581 18.8469 13.465 18.7256 13.6189C18.6185 13.7547 18.4772 13.861 18.317 13.9263C18.1361 14 17.9211 14 17.4921 14H7.73047M8 21C6.89543 21 6 20.1046 6 19C6 17.8954 6.89543 17 8 17C9.10457 17 10 17.8954 10 19C10 20.1046 9.10457 21 8 21Z" stroke="#1565C0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
                 </div>
             </div>
         </div>
     `;
-}
+    }
+    
+    function addToCart(productElement) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({
+            nome: productElement.getAttribute('data-nome'),
+            imagem: productElement.getAttribute('data-imagem'),
+            descricao: productElement.getAttribute('data-descricao'),
+            preco: productElement.getAttribute('data-preco')
+        });
+        localStorage.setItem('cart', JSON.stringify(cart));
+    
+        // Redirect to the shopping cart page
+        window.location.href = "shoppingcart.html";
+    }
 
-function addToCart(productElement) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.push({
-        nome: productElement.getAttribute('data-nome'),
-        imagem: productElement.getAttribute('data-imagem'),
-        descricao: productElement.getAttribute('data-descricao'),
-        preco: productElement.getAttribute('data-preco')
+    const response = await fetch('php/index.php', {
+        method: 'GET',
     });
-    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    const dados = await response.json();
+    const container = document.getElementById('card-container');
+    
+    dados.forEach((dado) => {
+        const conteudo = createProductCard(dado);
+        container.innerHTML += conteudo;
+    });
+    
+    
+    
+    var search_input = document.getElementById('search-input');
+        search_input.addEventListener('input', async () => {
+            
+            var suggestions = document.getElementsByClassName('suggest-options');
+            var form = document.getElementById('form');
+            var dados = new FormData(form);
 
-    // Redirect to the shopping cart page
-    window.location.href = "shoppingcart.html";
+            var promise = await fetch('php/searchProdutos.php', {
+                method: 'POST',
+                body: dados
+            })
+
+            var response = await promise.json();
+            const produtos = response;
+            const container = document.getElementById('card-container');
+            container.innerHTML = ``;
+    
+            produtos.forEach((produto) => {
+                const conteudo = createProductCard(produto);
+                container.innerHTML += conteudo;
+            })
+
+            for (var i = 0; i < suggestions.length; i++){
+                suggestions[i].value = produtos[i].nome;
+            }
+
+        })
+    
+    
+    
+
+    // Attach the event listener to SVG icons directly
+    const svgButtons = document.querySelectorAll('.svg-icon');
+        
+    svgButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Get product data from the grandparent (the card)
+            addToCart(button.parentNode.parentNode.parentNode);
+        });
+    });
+
+
+
+
 }
-
-fetchDataAndRender();
