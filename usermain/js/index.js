@@ -36,47 +36,41 @@ window.onload = async function () {
         window.location.href = "shoppingcart.html";
     }
 
-    const response = await fetch('php/index.php', {
+    var response = await fetch('php/index.php', {
         method: 'GET',
     });
     
-    const dados = await response.json();
-    const container = document.getElementById('card-container');
+    var dados = await response.json();
+    var container = document.getElementById('card-container');
     
     dados.forEach((dado) => {
-        const conteudo = createProductCard(dado);
+        var conteudo = createProductCard(dado);
         container.innerHTML += conteudo;
     });
     
     
     
     var search_input = document.getElementById('search-input');
-        search_input.addEventListener('input', async () => {
-            
-            var suggestions = document.getElementsByClassName('suggest-options');
-            var form = document.getElementById('form');
-            var dados = new FormData(form);
+    search_input.addEventListener('input', async () => {
 
-            var promise = await fetch('php/searchProdutos.php', {
-                method: 'POST',
-                body: dados
-            })
+        var produtosBuscados = dados.filter(produto => produto.nome.toLowerCase().includes(search_input.value.toLowerCase()));
 
-            var response = await promise.json();
-            const produtos = response;
-            const container = document.getElementById('card-container');
-            container.innerHTML = ``;
-    
-            produtos.forEach((produto) => {
+        const container = document.getElementById('card-container');
+        container.innerHTML = ``;
+        console.log(produtosBuscados)
+
+        if (!produtosBuscados.length) {
+            container.innerHTML = `<h2 id="aviso">Produto <span id="aviso-keyword">"${search_input.value}"</span> não encontrado</h2>`;
+        }
+        else {
+            produtosBuscados.forEach((produto) => {
                 const conteudo = createProductCard(produto);
                 container.innerHTML += conteudo;
+                
             })
+        }
 
-            for (var i = 0; i < suggestions.length; i++){
-                suggestions[i].value = produtos[i].nome;
-            }
-
-        })
+    })
     
     
     
