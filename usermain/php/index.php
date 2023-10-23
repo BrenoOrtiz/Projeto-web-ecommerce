@@ -1,4 +1,5 @@
 <?php
+
 $connection = mysqli_connect('localhost', 'root', 'Bod12345:)Breno', 'ecommerce');  
 
 if (!$connection){

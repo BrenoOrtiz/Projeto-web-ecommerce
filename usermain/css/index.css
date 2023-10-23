@@ -34,11 +34,70 @@ header{
     background-color: var(--bg-200);
 }
 
+.nav-links{
+    position: relative;
+    min-width: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 32px;
+}
 .nav-links a{
     text-decoration: none;
     color: var(--primary-300);
     transition: color 0.3s linear;
     font-size: 20px;
+}
+
+.fa-circle-user{
+    color: var(--primary-300);
+    transition: color 0.3s linear;
+}
+
+#menu-user{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 40px;
+    border-radius: 10px;
+    padding: 12px;
+    width: 150px;
+    background-color: var(--bg-300);
+
+}
+
+#nome{
+    font-size: 20px;
+}
+
+#email{
+    font-size: 18px;
+    color: var(--text-200);
+}
+
+.icon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    width: 55px;
+}
+
+.icon-container:hover .fa-circle-user{
+    color: var(--primary-200);
+}
+
+.fa-arrow-right-from-bracket{
+    padding: 18px 0 18px 0;
+}
+
+.log-out-container{
+    display: flex;
+    align-items: center;
+}
+.log-out-container:hover {
+    color: var(--primary-300);
 }
 
 #link-cadastro{
@@ -47,6 +106,11 @@ header{
 
 #link-login{
     margin-right: 64px;
+}
+
+#sair{
+    cursor: pointer;
+    padding-left: 8px;
 }
 
 
@@ -151,17 +215,62 @@ header{
     border: none;
    }
 
+
+   .qntd-produto{
+    height: 26px;
+    width: 26px;
+    background-color: transparent;
+    border: none;
+    color: var(--text-100);
+    text-align: center;
+   }
+
+   .qntd-produto:focus{
+    outline: none;
+    caret-color: transparent;
+   }
+
+   .amount-container{
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-200);
+    border-radius: 10px;
+    padding: 4px 8px 4px 8px;
+   }
+
+   .amount-container button{
+    color: var(--accent-100);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 12px;
+    height: 20px;
+   }
+
+   .amount-container button:hover{
+    color: var(--accent-200);
+   }
+
+   /* Oculta as setas em navegadores modernos */
+    .qntd-produto::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    appearance: none;
+}
+
    .text-title {
     justify-content: center;
     font-weight: 900;
-    font-size: 20px;
+    font-size: 18px;
    }
 
    p.text-title{
     margin: 28px 0 14px 0;
    }
    
-   .text-body {
+    .text-body {
     height: 40px;
     max-height: 40px;
     font-size: 14px;
@@ -188,3 +297,62 @@ header{
     border: 1px solid var(--accent-200);
     background-color: var(--accent-200);
 }
+
+.aviso{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    top: -20%;
+    left: calc(50% - 162px);
+    width: 320px;
+    height: 150px;
+    background-color: var(--bg-200);
+    border-radius: 14px;
+    padding: 12px 16px 12px 16px;
+    
+}
+
+.aviso a{
+    background-color: var(--accent-100);
+    min-width: 75px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--text-100);
+    text-align: center;
+    padding: 4px;
+    transition: all 0.3s linear;
+
+}
+
+.aviso span{
+    font-size: 20px;
+    padding-right: 12px;
+}
+
+.aviso a:hover{
+    background-color: var(--accent-200);
+    color: var(--accent-100);
+}
+
+.aviso-heading{
+    display: flex;
+}
+.fa-xmark{
+    color: var(--accent-100);
+}
+
+.fa-xmark:hover{
+    color: var(--accent-200);
+}
+
+@keyframes aviso{
+    from{
+        top: -20%;
+    }
+    to{
+        top: calc(40% - 75px);
+    }
+}
+

@@ -10,14 +10,13 @@ async function autenticar(){
     var mensagem_erro = document.getElementById('mensagem-erro');
     var form_container = document.getElementById('form-container');
 
-    mensagem_erro.textContent = response;
-
-    if (response == "Logado com sucesso!") {
-        mensagem_erro.style.color = "#008000";
+    if (response == 'Autenticado') { 
+        window.location.href = '../usermain/index.html';
     }
     else {
+        mensagem_erro.textContent = response;
         mensagem_erro.style.color = "#FF6347";
-        form_container.style.outline = "solid 1px #ff6347";
+        form_container.style.outline = "solid 1px #ff6347"; 
     }
 
 }

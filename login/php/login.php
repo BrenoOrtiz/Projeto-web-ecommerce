@@ -5,7 +5,6 @@ session_start();  // Iniciando uma sessão para guardar info caso usuário seja 
 // Declarando variáveis email e senha inseridos pelo usuário e uma variável que guarda se usuário foi autenticado ou não
 $email = $_POST['email'];
 $senha = $_POST['senha'];
-$autenticado = FALSE;
 
 // Conectando com o DB
 $connection = mysqli_connect('localhost', 'root', 'Bod12345:)Breno', 'ecommerce');  // USE SENHA DO SEU DB!!
@@ -18,7 +17,7 @@ if (!$connection){
 
 // Condição que verifica se campos inseridos pelo usuário estão vazios
 if (empty($email) || empty($senha)){
-    echo 'Erro: Campos não preenchidos';
+    echo json_encode('Para realizar o login insira os dados nos campos abaixo');
     exit();
 }
 
@@ -29,8 +28,10 @@ $query = "SELECT usuario_id, nome, email, senha FROM usuarios WHERE email = '$em
 if ($result = mysqli_query($connection, $query)){
     if ($user = mysqli_fetch_assoc($result)){        
         if (password_verify($senha, $user['senha'])){ 
-            echo json_encode("Logado com sucesso!");
-            $autenticado = TRUE;
+            $_SESSION["id"] = $user['usuario_id'];
+            $_SESSION["nome"] = $user['nome'];
+            $_SESSION['email'] = $email;
+            echo json_encode('Autenticado');
         }
         else{
             echo json_encode("Senha Incorreta");
@@ -44,14 +45,6 @@ else{
     echo "Erro na consulta: " . mysqli_error($connection);
 }
 
-// Se usuário foi autenticado guarde dados nas variáveis da Session Criada 
-if($autenticado){
-    $_SESSION["id"] = $user['usuario_id'];
-    $_SESSION["nome"] = $user['nome'];
-    $_SESSION['email'] = $email;
-}
-
 mysqli_close($connection);
 
 ?>
-

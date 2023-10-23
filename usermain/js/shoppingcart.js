@@ -1,119 +1,88 @@
-let discountPercentage = 0;
-let deliveryPrice = 5;
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadCart();
-    attachListeners(); 
-});
+document.addEventListener('DOMContentLoaded', async function () {
 
-function loadCart() {
-    const cartProducts = JSON.parse(localStorage.getItem('cart')) || [];
-    const container = document.getElementById('container-povo');
-    container.innerHTML = cartProducts.map(createCartItem).join('');
-
-    updateTotalWithDelivery();
-}
-
-function attachListeners() {
-    const deliveryDropdown = document.querySelector('.select');
-    const couponButton = document.getElementById('coupon-button');
-
-    deliveryDropdown.addEventListener('change', updateTotalWithDelivery);
-    couponButton.addEventListener('click', applyCoupon);
-}
-
-function applyCoupon() {
-    const couponInput = document.getElementById('coupon-input');
-    const couponCode = couponInput.value.trim();
-
-    console.log('Entered Coupon Code:', couponCode);
-
-    if (couponCode === 'BOAOJUICEBRABO10') {
-        discountPercentage = 10; 
-        updateTotalWithDelivery();
-        alert('Coupon applied successfully!');
-    } else {
-        alert('Invalid coupon code. Please try again.');
-    }
-
-    couponInput.value = '';
-}
-
-function createCartItem(product) {
-    return `
-        <div class="row mb-4 d-flex justify-content-between align-items-center">
-            <div class="col-md-2 col-lg-2 col-xl-2">
-                <img src="${product.imagem}" class="img-fluid rounded-3" alt="${product.nome}">
-            </div>
-            <div class="col-md-3 col-lg-3 col-xl-3">
-                <h6 class="text-muted">${product.nome}</h6>
-                <h6 class="text-black mb-0">${product.descricao}</h6>
-            </div>
-            <div class="col-md-3 col-lg-3 col-xl-2 d-flex" style="align-items: center;">
-                <button class="btn btn-link px-2" onclick="adjustQuantity('${product.nome}', 'decrease')">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <span id="quantity-${product.nome}" class="product-quantity">${product.quantity || 1}</span>
-                <button class="btn btn-link px-2" onclick="adjustQuantity('${product.nome}', 'increase')">
-                    <i class="fas fa-plus"></i>
-                </button>
-            </div>
-            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                <h6 class="mb-0">€ ${product.preco}</h6>
-            </div>
-            <div class="icon">
-                <a href="#!" onclick="event.preventDefault(); removeFromCart('${product.nome}');" class="text-muted"><i class="fas fa-times"></i></a>
-            </div>
-        </div>
-    `;
-}
-
-function adjustQuantity(productNome, action) {
-    const span = document.getElementById(`quantity-${productNome}`);
-    const currentQuantity = parseInt(span.textContent);
-
-    let newQuantity = (action === 'decrease') ? currentQuantity - 1 : currentQuantity + 1;
-    if (newQuantity < 0) newQuantity = 0;
-
-    span.textContent = newQuantity;
-
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const updatedCart = cart.map(product => {
-        if (product.nome === productNome) {
-            product.quantity = newQuantity;
-        }
-        return product;
+    var promiseUserData = await fetch('php/mostrarUser.php', {
+        method: 'GET',
     });
 
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    loadCart();
-}
-
-function removeFromCart(productNome) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const updatedCart = cart.filter(product => product.nome !== productNome);
-    
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    loadCart();
-}
-
-function updateTotalWithDelivery() {
-    const selectElement = document.querySelector('.select');
-    const selectedOption = selectElement.options[selectElement.selectedIndex].text;
-    const deliveryPriceMatch = selectedOption.match(/€([\d,]+(\.\d{2})?)/);
-     
-    if (deliveryPriceMatch) {
-        deliveryPrice = parseFloat(deliveryPriceMatch[1].replace(',', ''));
+    var responseUserData = await promiseUserData.json();
+    var nav = document.querySelector('.nav-links');
+    if (responseUserData == 'Não Autenticado') {
+        window.location.href = "../login/login.html";
+    }
+    else {
+        nav.innerHTML = `
+        <div class="icon-container">
+        <i class="fa-regular fa-circle-user fa-2xl"></i>
+        </div>
+        <div id="menu-user">
+            <span id="nome">${responseUserData.nome}</span>
+            <span id="email">${responseUserData.email}</span>
+            <hr id="user-menu-divider">
+            <div class="log-out-container">
+                <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
+                <span id="sair">Sair</span>
+            </div>
+        </div>
+        `;
     }
 
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let totalPrice = cart.reduce((total, product) => total + parseFloat(product.preco) * (product.quantity || 1), deliveryPrice);
+    var iconUser = document.querySelector('.icon-container');
+    iconUser.addEventListener('click', () => {
+        var menu = document.getElementById("menu-user");
+        if (menu.style.display == "") {
+            menu.style.display = "flex"
+        }
+        else {
+            menu.style.display = ""
+        }
+        
+    })
+    
 
-    const discountAmount = totalPrice * (discountPercentage / 100);
-    totalPrice -= discountAmount;
+    var promiseProdutos = await fetch('php/shoppingCart.php', {
+        method: 'GET'
+    })
 
-    document.getElementById('discount-value').textContent = `€ ${discountAmount.toFixed(2)}`;
-    document.getElementById('total-price').textContent = `€ ${totalPrice.toFixed(2)}`;
-    document.getElementById('total-items').textContent = `items ${cart.reduce((sum, product) => sum + (product.quantity || 1), 0)}`;
-    document.getElementById('item-count').textContent = `${cart.length} items`;  
-}
+    var responseProdutos = await promiseProdutos.json();
+
+    function renderProduct(product) {
+        return `<div class="produto-container">
+                    <div class="select-container">
+                        <input type="checkbox" name="" class="checkbox" data-id="${product.product_id}">
+                        <label for="">Selecionar produto</label>
+                    </div>
+                    <div class="produto">
+                        <img src="${product.imagem}" alt="" class="img-produto" height="200px" width="250px">
+                        <div class="info-produto">
+                            <p class="descricao">${product.descricao}</p>
+                            <span class="nome-produto">${product.nome}</span>
+                            <div class="details-container">
+                                <h3>R$${product.preco}</h3>
+                                <div class="contador">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    <i class="fa-solid fa-minus"></i>
+                                    <input type="number" name="quantidade" class="qntd-produto" value="${product.quantidade}">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>`;
+    }
+
+    var container = document.getElementById('products-container');
+
+    responseProdutos.forEach(produto => {
+        var conteudo = renderProduct(produto);
+        container.innerHTML += conteudo;
+    });
+
+
+    var qntdProdutosContainer = document.getElementById('qntd-produtos');
+    qntdProdutosContainer.textContent = responseProdutos.length;
+
+})
+
+
