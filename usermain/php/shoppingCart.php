@@ -10,40 +10,25 @@ if (!$connection){
     exit();
 }
 
-$queryCarrinho = "SELECT id FROM carrinhos WHERE id_usuario = '$user_id'";
-$resultCarrinho = mysqli_query($connection, $queryCarrinho);
-$carrinhoId = mysqli_fetch_assoc($resultCarrinho)['id'];
+$query = "  SELECT P.produto_id, P.nome, P.descricao, P.preco, P.estoque, SUM(CP.qntd_produto) AS 'qntd_produto' 
+            FROM carrinhos C
+            JOIN carrinhos_produtos CP ON CP.id_carrinho = C.id
+            JOIN produtos P ON P.produto_id = CP.id_produto
+            WHERE C.id_usuario = '$user_id'
+            GROUP BY P.produto_id";
 
-if(empty($carrinhoId)){
-    echo "Verifique o user id";
+$result = mysqli_query($connection, $query);
+
+if (!$result){
+    echo 'Erro na consulta'.mysqli_error($connection);
     exit();
 }
 
-$queryProdutos = "SELECT id_produto, qntd_produto FROM carrinhos_produtos WHERE id_carrinho = $carrinhoId";
-$resultProdutos = mysqli_query($connection, $queryProdutos);
-
-
-$produtosIDs = array();
-$produtos = array();
-
-while ($registroProdutos = mysqli_fetch_assoc($resultProdutos)){
-    array_push($produtos, $registroProdutos);
-    array_push($produtosIDs, $registroProdutos['id_produto']);
-}
-
-$queryDadosProdutos = "SELECT * FROM produtos WHERE produto_id IN (". implode(",", $produtosIDs) . ") ";
-$resultadoDadosProdutos = mysqli_query($connection, $queryDadosProdutos);
-
 $dados = array();
 
-for ($i = 0; $i < count($produtos); $i++){
-    $registro = mysqli_fetch_assoc($resultadoDadosProdutos);
-    if ($produtos[$i]['id_produto'] == $registro['produto_id']){
-        $registro['quantidade'] = $produtos[$i]['qntd_produto'];
-        array_push($dados, $registro);
-    }
+while ($registro = mysqli_fetch_assoc($result)){
+    array_push($dados, $registro);
 }
-
 
 echo json_encode($dados);
 

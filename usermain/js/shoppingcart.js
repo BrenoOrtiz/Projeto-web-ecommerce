@@ -45,15 +45,16 @@ document.addEventListener('DOMContentLoaded', async function () {
     })
 
     var responseProdutos = await promiseProdutos.json();
+    console.log(responseProdutos)
 
     function renderProduct(product) {
         return `<div class="produto-container">
                     <div class="select-container">
-                        <input type="checkbox" name="" class="checkbox" data-id="${product.product_id}">
+                        <input type="checkbox" name="" class="checkbox" data-id="${product.produto_id}">
                         <label for="">Selecionar produto</label>
                     </div>
                     <div class="produto">
-                        <img src="${product.imagem}" alt="" class="img-produto" height="200px" width="250px">
+                        <img src="" alt="" class="img-produto" height="200px" width="250px">
                         <div class="info-produto">
                             <p class="descricao">${product.descricao}</p>
                             <span class="nome-produto">${product.nome}</span>
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 <div class="contador">
                                     <i class="fa-solid fa-trash-can"></i>
                                     <i class="fa-solid fa-minus"></i>
-                                    <input type="number" name="quantidade" class="qntd-produto" value="${product.quantidade}">
+                                    <input type="number" name="quantidade" class="qntd-produto" value="${product.qntd_produto}">
                                     <i class="fa-solid fa-plus"></i>
                                 </div>
                             </div>
