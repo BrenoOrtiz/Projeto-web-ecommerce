@@ -25,7 +25,10 @@
             <div class="cart-heading">
                 <h2>Seu carrinho</h2><span id="qntd-produtos"></span>
                 <div class="select-container">
-                    <input type="checkbox" name="all-proucts" id="inpt-select-all" class="checkbox">
+                    <div class="checkbox">
+                        <input type="checkbox" name="all-products" id="inpt-select-all" class="All-checkbox" checked>
+                        <span class="checkmark"></span>
+                    </div>
                     <label for="all-products" id="selectAll-text">Selecionar todos</label>
                 </div>
             </div>
@@ -35,16 +38,17 @@
             <h2>Resumo de Compra</h2>
             <h3>Itens Selecionados</h3>
             <div class="itens-selected" id="selected-items">
-                <div class="item"><p>2x Best Juice</p> <span>X </span></div>
+                
             </div>
             <hr>
             <div class="total-value-container">
                 <h3>Valor Total</h3>
-                <span>X</span>
+                <span id="total-value"></span>
             </div>
 
         </div>
     </div>
+
 </body>
 
 </html>

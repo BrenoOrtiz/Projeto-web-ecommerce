@@ -14,7 +14,7 @@ window.onload = async function () {
             <div class="card-footer">
                 <div class="amount-container">
                     <button class="minus">-</button>
-                    <input type="number" name="quantidade" class="qntd-produto" value="1" data-estoque="${product.estoque}" data-produtoID="${product.produto_id}">
+                    <input type="number" name="quantidade" class="qntd-produto" value="1" data-estoque="${product.estoque}" data-produtoID="${product.produto_id}" readonly>
                     <button class="plus">+</button>
                 </div>
                 <span class="text-title">$${product.preco}</span>
@@ -92,8 +92,8 @@ window.onload = async function () {
                 var aviso = document.getElementById('aviso-text');
                 var overlay = document.getElementById('all-content');
 
-                if (response == "Produto inserido no carrinho com sucesso") {
-                    aviso_link.textContent = "Carrinho";
+                if (response == "Produto inserido no carrinho com sucesso!") {
+                    aviso_link.textContent = "Ir ao Carrinho";
                     aviso_link.href = "shoppingcart.html"
                 }
                 else {

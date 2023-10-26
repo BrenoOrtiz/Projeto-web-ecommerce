@@ -329,6 +329,7 @@ header{
 .aviso span{
     font-size: 20px;
     padding-right: 12px;
+    text-align: center;
 }
 
 .aviso a:hover{

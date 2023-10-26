@@ -181,18 +181,44 @@ h2{
 }
 
 .checkbox{
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 23px;
     margin: 0;
 }
+
+.checkbox input{
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    width: 23px;
+    height: 23px;
+    z-index: 1;
+    margin: 0;
+}
+
+.checkmark{
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    background-color: var(--text-200);
+    border-radius: 4px;
+    outline: solid 1px var(--text-200);
+}
+
+.checkbox:hover .checkmark{
+    background-color: #a5a5a5;
+}
+
+.checkbox input:checked ~ .checkmark{
+    background-color: var(--primary-300);
+}
+
+
 
 #selectAll-text{
     color: var(--text-200);
 }
 
-#inpt-select-all:checked{
-    background-color: var(--primary-200);
-}
 
 .produto{
     display: flex;
@@ -208,6 +234,11 @@ h2{
 
 .descricao{
     margin: 0;
+    color: var(--text-200);
+}
+
+.nome-produto{
+    font-size: 24px;
 }
 
 .details-container{
@@ -257,17 +288,20 @@ h2{
     color: var(--accent-200);
 }
 
-.fa-minus{
-    margin-left: 32px;
-}
-
 .fa-trash-can{
     color: var(--accent-100);
 }
 
-.contador{
+.contador-container{
     display: flex;
     align-items: center;
+}
+
+.contador{
+    background-color: var(--bg-200);
+    border-radius: 8px;
+    margin-left: 32px;
+    padding: 6px;
 }
 
 .cart-products hr{

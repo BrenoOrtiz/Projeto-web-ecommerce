@@ -37,7 +37,7 @@ if (!$result){
     echo "Erro ao inserir produto no carrinho".mysqli_error($conn);
 }
 else{
-    echo json_encode("Produto inserido no carrinho com sucesso");
+    echo json_encode("Produto inserido no carrinho com sucesso!");
 }
 
 ?>
