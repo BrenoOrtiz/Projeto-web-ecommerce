@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             <span id="nome">${responseUserData.nome}</span>
             <span id="email">${responseUserData.email}</span>
             <hr id="user-menu-divider">
-            <div class="log-out-container">
+            <div class="log-out-container" id="log-out">
                 <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
                 <span id="sair">Sair</span>
             </div>
@@ -37,6 +37,17 @@ document.addEventListener('DOMContentLoaded', async function () {
             menu.style.display = ""
         }
         
+    })
+
+    var logout = document.getElementById('log-out');
+    logout.addEventListener('click', async () => {
+        
+        var promiseLogout = await fetch('php/logoutUser.php', {
+            method: 'GET'
+        }) 
+
+        var responseLogout = await promiseLogout.json();
+        window.location.href = "../login/login.html";
     })
     
 
@@ -169,7 +180,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     RenderCompraDetails();
 
     Allcheckboxes.forEach(checkbox => {checkbox.addEventListener("click", RenderCompraDetails) })
-        
+    
                 
 })
 

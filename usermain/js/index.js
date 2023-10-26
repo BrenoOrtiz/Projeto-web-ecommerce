@@ -38,8 +38,7 @@ window.onload = async function () {
         var conteudo = createProductCard(dado);
         container.innerHTML += conteudo;
     });
-    
-    
+
     
     function addEventQuantidade() {
         const addbuttons = document.querySelectorAll('.plus');
@@ -106,8 +105,17 @@ window.onload = async function () {
             });
         });
     }
-
+    
     addEventCart();
+    
+    var icon = document.getElementById('close-icon');
+    icon.addEventListener('click', () => {
+        var overlay = document.getElementById('all-content');
+        var avisoContainer = document.querySelector('.aviso');
+        avisoContainer.style = "animation: none;"
+        overlay.style.opacity = "1.0";
+    })
+
 
     var search_input = document.getElementById('search-input');
     search_input.addEventListener('input', function busca(){
@@ -133,13 +141,6 @@ window.onload = async function () {
 
     })
 
-    var icon = document.getElementById('close-icon');
-    icon.addEventListener('click', () => {
-        var overlay = document.getElementById('all-content');
-        var avisoContainer = document.querySelector('.aviso');
-        avisoContainer.style = "animation: none;"
-        overlay.style.opacity = "1.0";
-    })
 
     var promiseUserData = await fetch('php/mostrarUser.php', {
         method: 'GET',
@@ -148,40 +149,54 @@ window.onload = async function () {
     var responseUserData = await promiseUserData.json();
     var nav = document.querySelector('.nav-links');
     if (responseUserData == 'Não Autenticado') {
+        // Implementação usuário não autenticado
         nav.innerHTML = `
         <a href="../cadastro/cadastro.html" id="link-cadastro">Cadastro</a>
         <a href="../login/login.html" id="link-login">Login</a>
         `;
     }
     else {
+        // Implementação caso usuário esteja autenticado
         nav.innerHTML = `
         <a href="shoppingcart.html">Carrinho</a>
         <div class="icon-container">
-        <i class="fa-regular fa-circle-user fa-2xl"></i>
+            <i class="fa-regular fa-circle-user fa-2xl"></i>
         </div>
         <div id="menu-user">
             <span id="nome">${responseUserData.nome}</span>
             <span id="email">${responseUserData.email}</span>
             <hr id="user-menu-divider">
-            <div class="log-out-container">
+            <div class="log-out-container" id="log-out">
                 <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
                 <span id="sair">Sair</span>
             </div>
         </div>
         `;
+
+        // Implementação abrir fechar menu usuário
+        var iconUser = document.querySelector('.icon-container');
+        iconUser.addEventListener('click', () => {
+            var menu = document.getElementById("menu-user");
+            if (menu.style.display == "") {
+                menu.style.display = "flex"
+            }
+            else {
+                menu.style.display = ""
+            }
+            
+        })
+
+        // Implementação Logout do usuário
+        var logout = document.getElementById('log-out');
+        logout.addEventListener('click', async () => {
+            await fetch('php/logoutUser.php', {
+                method: 'GET'
+            })
+            location.reload();
+        })
     }
 
-    var iconUser = document.querySelector('.icon-container');
-    iconUser.addEventListener('click', () => {
-        var menu = document.getElementById("menu-user");
-        if (menu.style.display == "") {
-            menu.style.display = "flex"
-        }
-        else {
-            menu.style.display = ""
-        }
-        
-    })
+
     
     
 }

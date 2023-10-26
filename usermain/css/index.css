@@ -304,7 +304,7 @@ header{
     justify-content: space-around;
     align-items: center;
     position: absolute;
-    top: -20%;
+    top: -50%;
     left: calc(50% - 162px);
     width: 320px;
     height: 150px;
@@ -350,7 +350,7 @@ header{
 
 @keyframes aviso{
     from{
-        top: -20%;
+        top: -50%;
     }
     to{
         top: calc(40% - 75px);
