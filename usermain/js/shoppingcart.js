@@ -61,10 +61,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         return `<div class="produto-container">
                     <div class="select-container">
                         <div class="checkbox">
-                            <input class="checkbox-inputs All-checkbox" type="checkbox" name="all-products" data-id="${product.produto_id}">
+                            <input class="checkbox-inputs All-checkbox" type="checkbox" name="${product.nome}" data-id="${product.produto_id}">
                             <span class="checkmark"></span>
                         </div>
-                        <label for="">Selecionar produto</label>
+                        <label for="${product.nome}">Selecionar produto</label>
                     </div>
                     <div class="produto">
                         <img src="" alt="" class="img-produto" height="200px" width="250px">
@@ -122,30 +122,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     selectAllinput.addEventListener('click', selectAllProducts)
 
-        const addbuttons = document.querySelectorAll('.fa-plus');
-        const minusbuttons = document.querySelectorAll('.fa-minus');
-        var qntdProdutoInput = document.querySelectorAll('.qntd-produto');
-        
-        addbuttons.forEach((button, i) => {
-            button.addEventListener('click', function increment() {
-                const qntdMax = qntdProdutoInput[i].getAttribute('data-estoque');
-                if (parseInt(qntdProdutoInput[i].value) < parseInt(qntdMax)) {
-                    qntdProdutoInput[i].value = parseInt(qntdProdutoInput[i].value) + 1;
-                }
-            });
-        });
-
-        minusbuttons.forEach((button, i) => {
-            button.addEventListener('click', function decrement() {
-                if (parseInt(qntdProdutoInput[i].value) > 1) {
-                    qntdProdutoInput[i].value = parseInt(qntdProdutoInput[i].value) - 1;
-                }
-            
-            });
-        });
     
     var itensSelecionados = document.getElementById('selected-items');
     var valorTotalContainer = document.getElementById('total-value');
+    var quantidadeInputs = document.querySelectorAll('.qntd-produto');
     
     function RenderCompraDetails() {
         
@@ -153,14 +133,15 @@ document.addEventListener('DOMContentLoaded', async function () {
         var valorTotal = 0.00;
         var isallSelected = true;
         var amountSelected = 0;
-
+        
         for (var i = 0; i < productCheckboxes.length; i++) {
             if (productCheckboxes[i].checked) {
                 var id_produto = productCheckboxes[i].getAttribute('data-id');
                 var produto = responseProdutos.find(produto => produto.produto_id === id_produto);
-                var preco = produto.preco * produto.qntd_produto
+                var quantidade = quantidadeInputs[i].value
+                var preco = produto.preco * quantidade
 
-                itensSelecionados.innerHTML += `<div class="item"><p>X${produto.qntd_produto} ${produto.nome}</p> <span>R$${preco}</span></div>`
+                itensSelecionados.innerHTML += `<div class="item"><p>X${quantidade} ${produto.nome}</p> <span>R$${preco}</span></div>`
                 valorTotal += parseFloat(preco);
             }
             else {
@@ -177,11 +158,59 @@ document.addEventListener('DOMContentLoaded', async function () {
         selectAllinput.checked = isallSelected;
         valorTotalContainer.textContent = 'R$' + valorTotal;
     }
+
     RenderCompraDetails();
 
-    Allcheckboxes.forEach(checkbox => {checkbox.addEventListener("click", RenderCompraDetails) })
+    Allcheckboxes.forEach(checkbox => {checkbox.addEventListener("click", RenderCompraDetails)})
     
                 
+    const addbuttons = document.querySelectorAll('.fa-plus');
+    const minusbuttons = document.querySelectorAll('.fa-minus');
+    var qntdProdutoInput = document.querySelectorAll('.qntd-produto');
+    
+    addbuttons.forEach((button, i) => {
+        button.addEventListener('click', function increment() {
+            const qntdMax = qntdProdutoInput[i].getAttribute('data-estoque');
+            if (parseInt(qntdProdutoInput[i].value) < parseInt(qntdMax)) {
+                qntdProdutoInput[i].value = parseInt(qntdProdutoInput[i].value) + 1;
+                RenderCompraDetails();
+            }
+        });
+    });
+    
+    minusbuttons.forEach((button, i) => {
+        button.addEventListener('click', function decrement() {
+            if (parseInt(qntdProdutoInput[i].value) > 1) {
+                qntdProdutoInput[i].value = parseInt(qntdProdutoInput[i].value) - 1;
+                RenderCompraDetails();
+            }
+        
+        });
+    });
+
+    var cuponBtn = document.querySelector('.button-cupon');
+    cuponBtn.addEventListener('click', () => {
+
+        var cupomInput = document.getElementById('promotionCodeInput');
+        var discountText = document.getElementById('discount-text');
+        var aviso = document.getElementById('aviso-cupom');
+
+        var code = cupomInput.value.toUpperCase().trim()
+        if (code === "BOAOJUICE" || code === "BRENOSUPER") {
+            var valor = parseFloat(valorTotalContainer.textContent.slice(2));
+            valor = valor - (valor / 15)
+            valorTotalContainer.textContent = "R$" + valor;
+            discountText.style.display = "inline"
+            cuponBtn.textContent = "Cupom aplicado";
+            cupomInput.value = "";
+            aviso.style.display = "none";
+        }
+        else if (!(cuponBtn.textContent == "Cupom aplicado")){
+            aviso.textContent = "Código para cupom inválido!"
+            aviso.style.display = "inline";
+        }
+    })
+
 })
 
 

@@ -38,14 +38,26 @@
             <h2>Resumo de Compra</h2>
             <h3>Itens Selecionados</h3>
             <div class="itens-selected" id="selected-items">
-                
             </div>
+            <hr>
+            <h3>Aplicar Cupom</h3>
+            <div class="cupon-container">
+                <input type="text" placeholder="Adicione codigo do cupom aqui" id="promotionCodeInput">
+                <button class="button-cupon"><i class='fa fa-ticket'></i> Aplicar Cupom</button>
+            </div>
+            <p id="aviso-cupom"></p>
             <hr>
             <div class="total-value-container">
                 <h3>Valor Total</h3>
-                <span id="total-value"></span>
+                <div class="span-valor-container">
+                    <span id="total-value"></span>
+                    <p id="discount-text">Desconto de 15% aplicado</p>
+                </div>
             </div>
-
+            <hr>
+            <div class="comprar-btn-container">
+                <button id="comprar-btn">Finalizar compra</button>
+            </div>
         </div>
     </div>
 

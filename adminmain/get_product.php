@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-$connection = mysqli_connect('localhost', 'root', 'jv200405', 'ecommerce');  
+$connection = mysqli_connect('localhost', 'root', 'Bod12345:)Breno', 'ecommerce');  
 if (!$connection) {
     echo json_encode(['error' => 'Connection error: ' . mysqli_connect_error()]);
     exit();

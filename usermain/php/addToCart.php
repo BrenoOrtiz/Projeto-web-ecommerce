@@ -11,7 +11,7 @@ else{
     $user_id = $_SESSION["id"];
 }
 
-$conn = mysqli_connect('localhost', 'root', 'jv200405', 'ecommerce');
+$conn = mysqli_connect('localhost', 'root', 'Bod12345:)Breno', 'ecommerce');
 
 if (!$conn) {
     echo "Connection error: " . mysqli_connect_error();

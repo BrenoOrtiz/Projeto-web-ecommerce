@@ -349,11 +349,15 @@ h2{
     margin: 0;
 }
 
+.ordem-compra h3{
+    font-size: 20px;
+}
+
 .total-value-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 16px 0 16px 0;
+    margin: 32px 0 32px 0;
 }
 
 .total-value-container h3{
@@ -364,4 +368,82 @@ h2{
     margin-right: 32px;
     font-size: 22px;
     font-weight: 600;
+}
+
+.cupon-container{
+    display: flex;
+    margin-bottom: 32px;
+    gap: 16px;
+    align-items: center;
+}
+
+#promotionCodeInput{
+    border: none;
+    width: 60%;
+    height: 35px;
+    border-radius: 10px;
+    padding: 4px;
+    font-size: 15px;
+    padding: 4px 8px 4px 8px;
+}
+
+#promotionCodeInput:focus{
+    outline: none;
+    caret-color: var(--accent-100);
+}
+
+.button-cupon{
+    width: 30%;
+    height: 43px;
+    background-color: var(--primary-200);
+    border: none;
+    color: var(--text-100);
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s linear;
+}
+
+.button-cupon:hover{
+    background-color: var(--primary-300);
+}
+
+#comprar-btn{
+    border: none;
+    background-color: var(--accent-100);
+    border-radius: 8px;
+    width: 60%;
+    height: 50px;
+    color: var(--text-100);
+    margin: 32px 0 32px 0;
+    font-size: 18px;
+    transition: all 0.3s linear;
+}
+
+.comprar-btn-container{
+    display: flex;
+    justify-content: center;
+}
+
+#comprar-btn:hover {
+    background-color: var(--accent-200);
+    color: rgb(64, 64, 64);
+}
+
+.span-valor-container{
+    position: relative;
+}
+
+.span-valor-container p{
+    display: none;
+    color: var(--accent-100);
+    position: absolute;
+    text-wrap: nowrap;
+    top: 10px;
+    right: 32px;
+}
+
+#aviso-cupom{
+    color: rgb(255, 91, 91);
+    margin: 0 0 32px;
+    display: none;
 }

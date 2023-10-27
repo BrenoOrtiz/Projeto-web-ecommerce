@@ -3,7 +3,7 @@ session_start();
 
 $user_id = $_SESSION['id'];
 
-$connection = mysqli_connect('localhost', 'root', 'jv200405', 'ecommerce');  
+$connection = mysqli_connect('localhost', 'root', 'Bod12345:)Breno', 'ecommerce');  
 
 if (!$connection){
     echo "Connection error: " . mysqli_connect_error();
