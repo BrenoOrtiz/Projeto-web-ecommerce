@@ -121,11 +121,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     selectAllProducts();
 
     selectAllinput.addEventListener('click', selectAllProducts)
-
+    
     
     var itensSelecionados = document.getElementById('selected-items');
     var valorTotalContainer = document.getElementById('total-value');
     var quantidadeInputs = document.querySelectorAll('.qntd-produto');
+    var cuponBtn = document.querySelector('.button-cupon');
     
     function RenderCompraDetails() {
         
@@ -156,7 +157,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
 
         selectAllinput.checked = isallSelected;
-        valorTotalContainer.textContent = 'R$' + valorTotal;
+
+        if (cuponBtn.textContent == "Cupom aplicado") {
+            valorTotal = (valorTotal - (valorTotal / 15)).toFixed(2);
+            valorTotalContainer.textContent = 'R$' + valorTotal;
+        } else {
+            valorTotalContainer.textContent = 'R$' + valorTotal.toFixed(2);
+            
+        }
     }
 
     RenderCompraDetails();
@@ -188,7 +196,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     });
 
-    var cuponBtn = document.querySelector('.button-cupon');
     cuponBtn.addEventListener('click', () => {
 
         var cupomInput = document.getElementById('promotionCodeInput');
@@ -198,7 +205,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         var code = cupomInput.value.toUpperCase().trim()
         if (code === "BOAOJUICE" || code === "BRENOSUPER") {
             var valor = parseFloat(valorTotalContainer.textContent.slice(2));
-            valor = valor - (valor / 15)
+            valor = (valor - (valor / 15)).toFixed(2);
             valorTotalContainer.textContent = "R$" + valor;
             discountText.style.display = "inline"
             cuponBtn.textContent = "Cupom aplicado";
