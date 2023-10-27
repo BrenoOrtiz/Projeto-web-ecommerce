@@ -7,7 +7,7 @@ $email = $_POST['email'];
 $senha = $_POST['senha'];
 
 // Conectando com o DB
-$connection = mysqli_connect('localhost', 'root', 'Bod12345:)Breno', 'ecommerce');  // USE SENHA DO SEU DB!!
+$connection = mysqli_connect('localhost', 'root', 'jv200405', 'ecommerce');  // USE SENHA DO SEU DB!!
 
 // Tratando erro de conexão
 if (!$connection){

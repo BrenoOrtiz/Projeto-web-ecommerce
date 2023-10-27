@@ -1,6 +1,6 @@
 <?php
 
-$connection = mysqli_connect('localhost', 'root', 'Bod12345:)Breno', 'ecommerce');  
+$connection = mysqli_connect('localhost', 'root', 'jv200405', 'ecommerce');  
 
 if (!$connection){
     echo "Connection error: " . mysqli_connect_error();

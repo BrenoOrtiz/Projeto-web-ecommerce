@@ -36,8 +36,8 @@ function generateTable(products) {
                 <td>${product.preco}</td>
                 <td>${product.estoque}</td>
                 <td>
-                    <button class="edit-button" data-id="${product.id}">Edit</button>
-                    <button class="remove-button" data-id="${product.id}">Remove</button>
+                    <button class="edit-button" onclick="editProduct(${product.produto_id})">Edit</button>
+                    <button class="remove-button" onclick="removeProduct(${product.produto_id})" data-id="${product.produto_id}">Remove</button>
                 </td>
             </tr>
         `;
@@ -50,4 +50,38 @@ function generateTable(products) {
 
     return tableHTML;
 }
+
+async function removeProduct(productId) {
+    const confirmDeletion = confirm('Are you sure you want to delete this product?');
+    if (confirmDeletion) {
+        const response = await fetch('delete_product.php', {
+            method: 'POST',
+            body: JSON.stringify({ action: 'delete', id: productId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert('Product deleted successfully!');
+            fetchData();
+        } else {
+            alert('Error deleting product!');
+        }
+    }
+}
+
+async function editProduct(productId) {
+    try {
+
+        const response = await fetch(`get_product.php?id=${productId}`);
+        const product = await response.json();
+        window.location.href = `edit_product.html?id=${productId}`;
+    } catch (error) {
+        console.error('Error fetching product details:', error);
+    }
+}
+
 

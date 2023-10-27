@@ -237,4 +237,15 @@ nav ul li a:hover {
     border: 1px solid #ffcaa6;
     background-color: #ffcaa6;
    }
+
+
+   .divallcreate{
+    display: flex;
+    justify-content: space-evenly;
+   }
+   .buttonc{
+    display: flex;
+    width: 30px;
+    height: 80px;
+   }
    
