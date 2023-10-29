@@ -303,7 +303,7 @@ header{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: -50%;
     left: calc(50% - 162px);
     width: 320px;

@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    <div id="all-content">
     <header>
         <div class="nav-container">
             <img src="img/logo.png" alt="LOGO" id="logo" height="50px" width="170px">
@@ -29,7 +30,7 @@
                         <input type="checkbox" name="all-products" id="inpt-select-all" class="All-checkbox" checked>
                         <span class="checkmark"></span>
                     </div>
-                    <label for="all-products" id="selectAll-text">Selecionar todos</label>
+                    <label for="inpt-select-all" id="selectAll-text">Selecionar todos</label>
                 </div>
             </div>
             <hr>
@@ -60,7 +61,58 @@
             </div>
         </div>
     </div>
+    </div>
 
+    <div class="pagamento-modal" id="modal-pag">
+        <h2>Formas de pagamento</h2>
+        <div class="container-forma-pag" >
+            <label for="inpt-credito">Crédito:</label>
+            <input class="inpts-forma-pag" type="radio" name="opcao-pag" id="inpt-credito" value="credito">
+            <label for="inpt-debito">Débito:</label>
+            <input class="inpts-forma-pag" type="radio" name="opcao-pag" id="inpt-debito" value="debito">
+            <label for="inpt-pix">Pix:</label>
+            <input class="inpts-forma-pag" type="radio" name="opcao-pag" id="inpt-pix" value="pix">
+        </div>
+        <div class="info-pagamento" id="info-pag">
+            <h2>Detalhes de Pagamento</h2>
+            <div id="cartao">
+                <div class="container-span-cartao">
+                    <label for="span-num-cartao">Número do Cartão:</label>
+                    <span class="dados-cartao" id="span-num-cartao"></span>
+                </div>
+                <div id="footer-cartao">
+                    <div class="container-span-cartao">
+                        <label for="span-nome-cartao">Nome:</label>
+                        <span class="dados-cartao" id="span-nome-cartao"></span>
+                    </div>
+                    <div class="container-span-cartao">
+                        <label for="span-cvc-cartao">CVC:</label>
+                        <span class="dados-cartao" id="span-cvc-cartao"></span>
+                    </div>
+                </div>
+            </div>
+            <form id="pagamento-form">
+                <input class="number-inputs-pag inpts-pag" type="number" name="num-cartao" id="num-cartao" placeholder="Numero do Cartão" data-id="span-num-cartao">
+                <input class="inpts-pag" type="text" name="nome-cartao" id="nome-cartao" placeholder="Nome" data-id="span-nome-cartao">
+                <input class="number-inputs-pag inpts-pag"type="number" name="codigo-cartao" id="codigo-cartao" placeholder="CVC" data-id="span-cvc-cartao">
+            </form>
+        </div>
+        <div id="pix-container">
+            <h2>Chave pix</h2>
+            <p>070-560-769-04</p>
+        </div>
+        <div class="valor-pag-container" id="valor-pag-container">
+            <h3>Valor Total</h3>
+            <span id="valor-pag"></span>
+        </div>
+        <div class="aviso">
+            <h3 id="aviso-text"></h3>
+        </div>
+        <div class="pagamento-buttons">
+            <button id="confirm-pag-btn">Comprar</button>
+            <button id="cancel-pag-btn">Cancelar</button>
+        </div>
+    </div>
 </body>
 
 </html>
