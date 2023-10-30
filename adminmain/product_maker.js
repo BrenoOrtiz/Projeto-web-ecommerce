@@ -15,13 +15,14 @@ window.onload = async function fetchData() {
 
 function generateTable(products) {
     let tableHTML = `
-        <table border="1">
+        <table>
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th>Preço</th>
                     <th>Estoque</th>
+                    <th>Imagem</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -35,6 +36,7 @@ function generateTable(products) {
                 <td>${product.descricao}</td>
                 <td>${product.preco}</td>
                 <td>${product.estoque}</td>
+                <td>${product.imagem}</td>
                 <td>
                     <button class="edit-button" onclick="editProduct(${product.produto_id})">Edit</button>
                     <button class="remove-button" onclick="removeProduct(${product.produto_id})" data-id="${product.produto_id}">Remove</button>
@@ -51,37 +53,54 @@ function generateTable(products) {
     return tableHTML;
 }
 
-async function removeProduct(productId) {
-    const confirmDeletion = confirm('Are you sure you want to delete this product?');
-    if (confirmDeletion) {
+function removeProduct(productId) {
+    var avisoContainer = document.querySelector('.aviso');
+    var aviso = document.getElementById('aviso-text');
+    var overlay = document.getElementById('all-content');
+    var confirmarBtn = document.getElementById('confirmar-btn');
+
+    confirmarBtn.style.display = 'block';
+
+    aviso.textContent = "Tem certeza que deseja remover o produto?";
+    overlay.style.opacity = "0.7";
+    avisoContainer.style = "animation: aviso 0.5s ease-out forwards;"
+
+    var dados = new FormData();
+    dados.append('id_produto', productId);
+
+    confirmarBtn.addEventListener('click', async() => {
         const response = await fetch('delete_product.php', {
             method: 'POST',
-            body: JSON.stringify({ action: 'delete', id: productId }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            body: dados
+            
         });
-
+    
         const result = await response.json();
+        aviso.textContent = result;
+        confirmarBtn.style.display = 'none';
+    })
+    
 
-        if (result.success) {
-            alert('Product deleted successfully!');
-            fetchData();
-        } else {
-            alert('Error deleting product!');
-        }
-    }
+        
 }
 
 async function editProduct(productId) {
     try {
 
-        const response = await fetch(`get_product.php?id=${productId}`);
-        const product = await response.json();
         window.location.href = `edit_product.html?id=${productId}`;
     } catch (error) {
         console.error('Error fetching product details:', error);
     }
 }
+
+var icon = document.getElementById('close-icon');
+icon.addEventListener('click', () => {
+    var overlay = document.getElementById('all-content');
+    var avisoContainer = document.querySelector('.aviso');
+    avisoContainer.style = "animation: none;"
+    overlay.style.opacity = "1.0";
+    window.location.reload();
+})
+
 
 

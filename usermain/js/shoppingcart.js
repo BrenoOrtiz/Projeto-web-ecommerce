@@ -42,11 +42,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     var logout = document.getElementById('log-out');
     logout.addEventListener('click', async () => {
         
-        var promiseLogout = await fetch('php/logoutUser.php', {
+        await fetch('php/logoutUser.php', {
             method: 'GET'
         }) 
 
-        var responseLogout = await promiseLogout.json();
         window.location.href = "../login/login.html";
     })
     
@@ -90,11 +89,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     var container = document.getElementById('products-container');
-
+    
     responseProdutos.forEach(produto => {
         var conteudo = renderProduct(produto);
         container.innerHTML += conteudo;
     });
+
+    if (responseProdutos.length < 1) {
+        container.innerHTML += `<h3 id="aviso-carrinho">Nenhum produto adicionado ao carrinho <a href="index.html">Adicionar produtos</a></h3>`; 
+    }
 
 
     var qntdProdutosContainer = document.getElementById('qntd-produtos');
@@ -247,8 +250,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     var othercontent = document.getElementById('all-content');
     
     comprarBtn.addEventListener("click", () => {
-        pagamentoModal.style.display = "flex";
-        othercontent.style.opacity = "0.6"
+        if (produtosSelecionados.length > 0) {
+            pagamentoModal.style.display = "flex";
+            othercontent.style.opacity = "0.6"
+        }
         
     })
 
@@ -288,15 +293,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         })
     })
 
-    var btnCancelPag = document.getElementById('cancel-pag-btn');
-    btnCancelPag.addEventListener('click', () => {
-        pagamentoModal.style.display = 'none';
-        othercontent.style.opacity = "1.0"
-    })
-
+    
     var finalizarCompraBtn = document.getElementById('confirm-pag-btn');
-    var avisoText = document.getElementById('aviso-text');
-
+    
     finalizarCompraBtn.addEventListener('click', async ()=> {
         var dadosCompra = new FormData();
         dadosCompra.append('valor_total', valorTotal);
@@ -307,16 +306,23 @@ document.addEventListener('DOMContentLoaded', async function () {
             method: 'POST',
             body: dadosCompra
         }) 
-
+        
         var responseCompra = await promiseCompra.json();
         
         if (responseCompra == "Compra realizada com sucesso!") {
-            infoPag.style.display = "none";
-            valorPagContainer.style.display = "none";
-            pixContainer.style.display = "none";
-            avisoText.textContent = responseCompra;
+            window.location.reload();
         }
     })
+    
+    function closeModal() {
+        pagamentoModal.style.display = 'none';
+        othercontent.style.opacity = "1.0"
+        finalizarCompraBtn.style.display = 'block';
+        avisoText.textContent = "";
+    }
+
+    var btnCancelPag = document.getElementById('cancel-pag-btn');
+    btnCancelPag.addEventListener('click', closeModal)
 
 })
 

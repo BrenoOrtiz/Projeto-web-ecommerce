@@ -1,5 +1,4 @@
 <?php
-header('Content-Type: application/json');
 
 $connection = mysqli_connect('localhost', 'root', 'Bod12345:)Breno', 'ecommerce');  
 if (!$connection) {
@@ -14,20 +13,15 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 
 $productId = $_GET['id'];
 
-$stmt = $connection->prepare("SELECT * FROM produtos WHERE produto_id = ?");
-$stmt->bind_param("i", $productId);
+$query = "SELECT * FROM produtos WHERE produto_id = $productId";
+$result = mysqli_query($connection, $query);
 
-if ($stmt->execute()) {
-    $result = $stmt->get_result();
-    $product = $result->fetch_assoc();
-    if ($product) {
-        echo json_encode($product);
-    } else {
-        echo json_encode(['error' => 'Product not found.']);
-    }
+$product = mysqli_fetch_assoc($result);
+
+if ($product) {
+    echo json_encode($product);
 } else {
-    echo json_encode(['error' => 'Database query error: ' . $stmt->error]);
+        echo json_encode(['Produto não encontrado']);
 }
 
-$stmt->close();
 ?>

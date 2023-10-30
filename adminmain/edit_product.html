@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="allmain.js"></script>    
+    <script src="allmain.js"></script> 
+    <script defer src="edit_product.js"></script>  
     <link rel="stylesheet" href="allmain.css">
+    <script src="https://kit.fontawesome.com/d5fcfde473.js" crossorigin="anonymous"></script> 
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper" id="all-content">
         <nav id="sidebar">
             <div>
                 <div class="logo-container">
@@ -25,11 +27,11 @@
                         <img src="icons/sales.png" alt="" height="30px" width="30px">
                         <a href="sales.html">Sales</a></li>
                     <li>
-                        <img src="icons/users.png" alt="" height="30px" width="30px">
+                        <i class="fa-solid fa-users fa-xl"></i>
                         <a href="users.html">Users</a></li>
                     <li>
-                        <img src="" alt="" height="30px" width="30px">
-                        <a href="product_maker.html">Edit Products</a>
+                        <i class="fa-solid fa-basket-shopping fa-xl" style="color: #ffffff;"></i>
+                        <a href="product_maker.html">Products</a>
                     </li>
                 </ul>
             </div>
@@ -44,23 +46,45 @@
                 </div>
             </div>
         </nav>
-        <h2>Edit Product</h2>
-        <form id="edit-product-form">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-            <br>
-            <label for="descricao">Descrição:</label>
-            <input type="text" id="descricao" name="descricao" required>
-            <br>
-            <label for="preco">Preço:</label>
-            <input type="text" id="preco" name="preco" required>
-            <br>
-            <label for="estoque">Estoque:</label>
-            <input type="text" id="estoque" name="estoque" required>
-            <br>
-            <button type="button" onclick="updateProduct()">Update Product</button>
-        </form>
-
+        <div class="content">
+            <img  alt="menu-icon-svg" src="icons/menu.png" height="32px" width="32px" id="menu-icon-content" class="sidebar-toggle" onclick="toggleSidebar()"><img>
+            <div class="container-form">
+                <form id="form">
+                    <h1>Editar Produto</h1>
+                    <div class="container-inpts-fields">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="container-inpts-fields">
+                        <label for="descricao">Descrição</label>
+                        <input type="text" id="descricao" name="descricao" required>
+                    </div>
+    
+                    <div class="container-inpts-fields">
+                        <label for="preco">Preço</label>
+                        <input type="text" id="preco" name="preco" required>
+                    </div>
+                    <div class="container-inpts-fields">
+                        <label for="estoque">Estoque</label>
+                        <input type="text" id="estoque" name="estoque" required>
+                    </div>
+                    <div class="container-inpts-fields">
+                        <label for="imagem">Imagem</label>
+                        <input type="file" name="imagem" id="imagem" accept="image/jpeg, image/png">
+                    </div>
+                  
+                    <input id="submit-btn" onclick="updateProduct();" value="ENVIAR">
+                </form>
+            </div>
+        </div>
+    </div>
+    
+        <div class="aviso">
+            <div class="aviso-heading">
+                <span id="aviso-text"></span>
+                <i class="fa-solid fa-xmark" id="close-icon"></i>
+            </div>
+            <a href="product_maker.html" id="aviso-link">Voltar para Produtos</a>
+        </div>
 </body>
-<script defer src="edit_product.js"></script>
 </html>

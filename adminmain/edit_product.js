@@ -11,16 +11,14 @@ async function fetchProductDetails() {
         return;
     }
 
-    try {
+    
         const response = await fetch(`get_product.php?id=${productId}`);
         const product = await response.json();
 
         ['nome', 'descricao', 'preco', 'estoque'].forEach(field => {
             document.getElementById(field).value = product[field];
         });
-    } catch (error) {
-        console.error('Error fetching product details:', error);
-    }
+    
 }
 
 async function updateProduct() {
@@ -30,33 +28,35 @@ async function updateProduct() {
         return;
     }
 
-    const updatedProduct = {
-        id: productId,
-        nome: document.getElementById('nome').value,
-        descricao: document.getElementById('descricao').value,
-        preco: document.getElementById('preco').value,
-        estoque: document.getElementById('estoque').value
-    };
+    var form = document.getElementById('form');
+    var dados = new FormData(form);
+    dados.append('id', productId);
 
-    try {
-        const response = await fetch('edit_product.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedProduct)
-        });
+   
+    const response = await fetch('edit_product.php', {
+        method: 'POST',
+        body: dados
+    });
 
-        const result = await response.json();
-        if (result.success) {
-            alert('Product updated successfully!');
-        } else {
-            alert('Error updating product!');
-        }
-    } catch (error) {
-        console.error('Error updating product:', error);
-    }
+    const result = await response.json(); 
+    var avisoContainer = document.querySelector('.aviso');
+    var aviso = document.getElementById('aviso-text');
+    var overlay = document.getElementById('all-content');
+ 
+    aviso.textContent = result;
+    overlay.style.opacity = "0.7";
+    avisoContainer.style = "animation: aviso 0.5s ease-out forwards;"
+    
+
 }
+
+var icon = document.getElementById('close-icon');
+icon.addEventListener('click', () => {
+    var overlay = document.getElementById('all-content');
+    var avisoContainer = document.querySelector('.aviso');
+    avisoContainer.style = "animation: none;"
+    overlay.style.opacity = "1.0";
+})
 
 window.onload = fetchProductDetails;
 

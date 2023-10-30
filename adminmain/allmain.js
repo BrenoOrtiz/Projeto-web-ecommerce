@@ -14,12 +14,5 @@ function toggleSidebar() {
 }
 
 
-window.addEventListener('click', function(event) {
-    const dropdown = document.querySelector('.dropdown');
-    const userIcon = document.querySelector('.user-icon');
-    if (!dropdown.contains(event.target) && !userIcon.contains(event.target)) {
-        dropdown.style.display = 'none';
-    }
-});
 
 

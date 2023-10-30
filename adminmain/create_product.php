@@ -4,20 +4,29 @@ if (!$connection){
     die("Connection error: " . mysqli_connect_error());
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
     $estoque = $_POST['estoque'];
+    $imagem_arquivo = $_FILES['imagem'];
+    $nome_imagem = $imagem_arquivo["name"];
 
-    $query = "INSERT INTO produtos (nome, descricao, preco, estoque) VALUES ('$nome', '$descricao', '$preco', '$estoque')";
+    $novo_endereco = "../img/".$nome_imagem;
+
+    if ($imagem_arquivo["type"] == "image/jpeg"  || $imagem_arquivo["type"] == "image/png"){
+        move_uploaded_file($imagem_arquivo["tmp_name"], $novo_endereco);
+    }
+    else{
+        echo json_encode("Arquivo não é do tipo jpeg ou png");
+        exit();
+    }
+
+    $query = "INSERT INTO produtos (nome, descricao, preco, estoque, imagem) VALUES ('$nome', '$descricao', $preco, $estoque, '$nome_imagem')";
 
     if (mysqli_query($connection, $query)) {
-        echo "New product created successfully!";
-        // Optionally, redirect back to the product list page
-        header("Location: product_maker.html");
+        echo json_encode("Produto criado com sucesso!");
     } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($connection);
+        echo json_encode("Erro ao inserir os dados");
     }
-}
+
 ?>

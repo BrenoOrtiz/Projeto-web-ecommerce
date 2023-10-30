@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="allmain.js"></script>    
     <link rel="stylesheet" href="allmain.css">
+    <script src="https://kit.fontawesome.com/d5fcfde473.js" crossorigin="anonymous"></script> 
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper" id="all-content">
         <nav id="sidebar">
             <div>
                 <div class="logo-container">
@@ -25,11 +26,11 @@
                         <img src="icons/sales.png" alt="" height="30px" width="30px">
                         <a href="sales.html">Sales</a></li>
                     <li>
-                        <img src="icons/users.png" alt="" height="30px" width="30px">
+                        <i class="fa-solid fa-users fa-xl"></i>
                         <a href="users.html">Users</a></li>
                     <li>
-                        <img src="" alt="" height="30px" width="30px">
-                        <a href="product_maker.html">Edit Products</a>
+                        <i class="fa-solid fa-basket-shopping fa-xl" style="color: #ffffff;"></i>
+                        <a href="product_maker.html">Products</a>
                     </li>
                 </ul>
             </div>
@@ -44,17 +45,28 @@
                 </div>
             </div>
         </nav>
-        <h1>Produtos</h1>
-        <div class="divallcreate">
-        <div id="table-container"></div>
         <div class="content">
-        </div>
-        <div class="buttonc">
-            <button onclick="window.location.href='create_product.html'" >Create New Product</button>
-        </div>
-        <img  alt="menu-icon-svg" src="icons/menu.png" height="32px" width="32px" id="menu-icon-content" class="sidebar-toggle" onclick="toggleSidebar()"><img>
-        </div>
+
             <img  alt="menu-icon-svg" src="icons/menu.png" height="32px" width="32px" id="menu-icon-content" class="sidebar-toggle" onclick="toggleSidebar()"><img>
+
+            <div class="header">
+                <h1>Produtos</h1>
+                <a href="create_product.html">Novo produto</a>
+            </div>
+
+            <div id="table-container"></div>
+
+        </div>
+    </div>
+
+    <div class="aviso">
+        <div class="aviso-heading">
+            <span id="aviso-text"></span>
+            <i class="fa-solid fa-xmark" id="close-icon"></i>
+        </div>
+        <div class="buttons-container">
+            <button id="confirmar-btn">Remover</button>
+            <a href="product_maker.html" id="aviso-link">Cancelar</a>
         </div>
     </div>
 

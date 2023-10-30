@@ -523,7 +523,7 @@ h2{
 
 
 #cartao{
-    background-image: url(../img/magicpattern-mesh-gradient-1698522323672.png);
+    background-image: url(../img/mesh-gradient.png);
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -630,6 +630,14 @@ h2{
     margin: 0 0 32px 0;
 }
 
-#aviso-text{
-    color: rgb(130, 222, 130);
+#aviso-carrinho{
+    font-size: 22px;
+}
+
+#aviso-carrinho a{
+    color: var(--accent-100);
+}
+
+#aviso-carrinho a:hover{
+    color: var(--accent-200);
 }
