@@ -7,7 +7,7 @@ if (!$connection) {
 }
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    echo json_encode(['error' => 'Product ID not provided.']);
+    echo json_encode(['Id do produto não providenciado']);
     exit();
 }
 

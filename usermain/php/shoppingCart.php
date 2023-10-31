@@ -10,7 +10,7 @@ if (!$connection){
     exit();
 }
 
-$query = "  SELECT P.produto_id, P.nome, P.descricao, P.preco, P.estoque, SUM(CP.qntd_produto) AS 'qntd_produto' 
+$query = "  SELECT P.produto_id, P.nome, P.descricao, P.preco, P.estoque, P.imagem, SUM(CP.qntd_produto) AS 'qntd_produto' 
             FROM carrinhos C
             JOIN carrinhos_produtos CP ON CP.id_carrinho = C.id
             JOIN produtos P ON P.produto_id = CP.id_produto

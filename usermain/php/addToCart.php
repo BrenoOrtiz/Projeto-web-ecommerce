@@ -2,7 +2,6 @@
 session_start();
 
 $id_produto = $_POST["id"];
-$quantidade = $_POST["quantidade"];
 if (empty($_SESSION["id"])){
     echo json_encode("Por favor realize o login antes de adicionar produto ao carrinho");
     exit();
@@ -29,7 +28,7 @@ if(!$result_busca){
 $registro_busca = mysqli_fetch_assoc($result_busca);
 $carrinho_id = $registro_busca['id'];
 
-$query = "INSERT INTO carrinhos_produtos(id_carrinho, id_produto, qntd_produto) VALUES ('$carrinho_id', '$id_produto', '$quantidade')";
+$query = "INSERT INTO carrinhos_produtos(id_carrinho, id_produto, qntd_produto) VALUES ('$carrinho_id', '$id_produto', 1)";
 
 $result = mysqli_query($conn, $query);
 

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="allmain.js"></script> 
-    <script defer src="edit_product.js"></script>  
-    <link rel="stylesheet" href="allmain.css">
+    <script src="js/allmain.js"></script> 
+    <script defer src="js/edit_product.js"></script>  
+    <link rel="stylesheet" href="css/allmain.css">
     <script src="https://kit.fontawesome.com/d5fcfde473.js" crossorigin="anonymous"></script> 
 </head>
 
@@ -15,39 +15,29 @@
         <nav id="sidebar">
             <div>
                 <div class="logo-container">
-                    <span class="logo-name">BoaoJuice</span>
-                    <img  alt="menu-icon-svg" src="icons/close.png" height="28px" width="28px" id="menu-icon" class="sidebar-toggle" onclick="toggleSidebar()"><img>
+                    <img src="img/logo.png" alt="logo" width="120px" height="50px">
+                    <img  alt="menu-icon-svg" src="img/close.png" height="28px" width="28px" id="menu-icon" class="sidebar-toggle" onclick="toggleSidebar()"><img>
                 </div>
                 <hr class="separator">
                 <ul>
                     <li>
-                        <img src="icons/overview.png" alt="" height="30px" width="30px">
-                        <a href="main.html">Overview</a></li>
-                    <li>
-                        <img src="icons/sales.png" alt="" height="30px" width="30px">
-                        <a href="sales.html">Sales</a></li>
-                    <li>
-                        <i class="fa-solid fa-users fa-xl"></i>
-                        <a href="users.html">Users</a></li>
+                        <i class="fa-solid fa-cart-plus fa-xl" style="color: #ffffff;"></i>
+                        <a href="create_product.html">Criar Produto</a></li>
                     <li>
                         <i class="fa-solid fa-basket-shopping fa-xl" style="color: #ffffff;"></i>
-                        <a href="product_maker.html">Products</a>
+                        <a href="product_maker.html">Produtos</a>
                     </li>
                 </ul>
             </div>
             <div>
-                <div class="nav-bottom-elements-container">
-                    <img src="icons/settings.png" alt="" height="30px" width="30px">
-                        <a href="../usermain/settings.html">Settings</a>
-                </div>
                 <div class="nav-bottom-elements-container" id="log-out-container">
-                    <img src="icons/log-out.png" alt="log-out-icon" height="30px" width="30px">
-                    <a href="#">Log Out</a>
+                    <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
+                    <a href="#">Sair</a>
                 </div>
             </div>
         </nav>
         <div class="content">
-            <img  alt="menu-icon-svg" src="icons/menu.png" height="32px" width="32px" id="menu-icon-content" class="sidebar-toggle" onclick="toggleSidebar()"><img>
+            <img  alt="menu-icon-svg" src="img/menu.png" height="32px" width="32px" id="menu-icon-content" class="sidebar-toggle" onclick="toggleSidebar()"><img>
             <div class="container-form">
                 <form id="form">
                     <h1>Editar Produto</h1>

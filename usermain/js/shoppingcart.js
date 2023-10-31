@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         await fetch('php/logoutUser.php', {
             method: 'GET'
         }) 
-
         window.location.href = "../login/login.html";
     })
     
@@ -66,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         <label for="${product.nome}">Selecionar produto</label>
                     </div>
                     <div class="produto">
-                        <img src="" alt="" class="img-produto" height="200px" width="250px">
+                        <img src="../img/${product.imagem}" alt="" class="img-produto" height="200px" width="250px">
                         <div class="info-produto">
                             <p class="descricao">${product.descricao}</p>
                             <span class="nome-produto">${product.nome}</span>

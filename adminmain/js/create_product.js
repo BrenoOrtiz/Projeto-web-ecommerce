@@ -6,7 +6,7 @@ async function create() {
     var aviso = document.getElementById('aviso-text');
     var overlay = document.getElementById('all-content');
 
-    var promise = await fetch('create_product.php', {
+    var promise = await fetch('php/create_product.php', {
         method: 'POST',
         body: dados
     })

@@ -310,6 +310,7 @@ h2{
 
 .img-produto{
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .ordem-compra h3{

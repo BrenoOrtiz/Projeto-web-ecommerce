@@ -22,16 +22,20 @@ body{
 header{
     width: 100%;
     display: flex;
-    justify-content: center;
 }
 
 .nav-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 75px;
+    height: 85px;
     width: 100%;
     background-color: var(--bg-200);
+}
+
+.container-logo-input{
+    display: flex;
+    align-items: center;
 }
 
 .nav-links{
@@ -64,6 +68,7 @@ header{
     padding: 12px;
     width: 150px;
     background-color: var(--bg-300);
+    z-index: 1;
 
 }
 
@@ -76,7 +81,7 @@ header{
     color: var(--text-200);
 }
 
-.icon-container{
+.icon-container, #icon-menu-container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,19 +89,37 @@ header{
     width: 55px;
 }
 
-.icon-container:hover .fa-circle-user{
-    color: var(--primary-200);
+#menu-links{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 80px;
+    border-radius: 10px;
+    padding: 12px;
+    background-color: var(--bg-300);
+    z-index: 1;
+}
+
+#menu-links a{
+    width: 100%;
+    margin: 6px 0 6px 0;
+}
+
+.fa-bars{
+    color: var(--primary-300);
 }
 
 .fa-arrow-right-from-bracket{
     padding: 18px 0 18px 0;
 }
 
-.log-out-container{
+.log-out-container, .carrinho-container{
     display: flex;
     align-items: center;
+    margin: 4px 0 4px 0;
 }
-.log-out-container:hover {
+.log-out-container:hover, .carrinho-container:hover {
     color: var(--primary-300);
 }
 
@@ -108,7 +131,7 @@ header{
     margin-right: 64px;
 }
 
-#sair{
+#sair, #carrinho-link{
     cursor: pointer;
     padding-left: 8px;
 }
@@ -122,18 +145,6 @@ header{
     margin-left: 32px;
 }
 
-.products-heading{
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin: 64px 32px 16px 32px ;
-}
-
-.products-heading span{
-    font-size: 28px;
-    color: var(--text-200);
-}
-
 #search-input{
     background-color: var(--text-200);
     width: 250px;
@@ -141,19 +152,13 @@ header{
     height: 40px;
     border-radius: 8px;
     border: none;
-    margin-left: 32px;
+    margin-left: 64px;
     color: #252525;
-}
-
-#search-svg{
-    position: relative;
-    width: 27px;
-    height: 27px;
-    right: 255px;
+    font-size: 16px;
 }
 
 #search-input:focus{
-    outline: none;
+    outline: 1px solid var(--primary-300);
     caret-color: #1565C0;
 }
 
@@ -164,8 +169,8 @@ header{
 #card-container{
     display: flex;
     flex-wrap: wrap;
-    gap: 0px;
-    padding: 8px 32px 32px 32px;
+    gap: 16px;
+    padding: 32px;
 }
 
 .card {
@@ -176,18 +181,21 @@ header{
     padding: 12px;
     background:  var(--bg-300);
     position: relative;
-    margin: 10px;
     border-radius: 4px;
     color: var(--text-100);
 
    }
    
    .card-img {
-    background-color: #FFFFFF;
     height: 120px;
     width: 100%;
     border-radius: 6px;
     transition: .3s ease;
+   }
+
+   .card-img img{
+    object-fit: cover;
+    border-radius: 6px;
    }
    
    .card-info {
@@ -203,7 +211,6 @@ header{
    .card-footer {
     width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin: 16px 0 8px 0;
    }
@@ -214,51 +221,6 @@ header{
     background: linear-gradient(to right, var(--primary-200) 0%, var(--primary-300) 100%);
     border: none;
    }
-
-
-   .qntd-produto{
-    height: 26px;
-    width: 26px;
-    background-color: transparent;
-    border: none;
-    color: var(--text-100);
-    text-align: center;
-   }
-
-   .qntd-produto:focus{
-    outline: none;
-    caret-color: transparent;
-   }
-
-   .amount-container{
-    display: flex;
-    align-items: center;
-    background-color: var(--bg-200);
-    border-radius: 10px;
-    padding: 4px 8px 4px 8px;
-   }
-
-   .amount-container button{
-    color: var(--accent-100);
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 700;
-    background: none;
-    border: none;
-    padding: 0;
-    width: 12px;
-    height: 20px;
-   }
-
-   .amount-container button:hover{
-    color: var(--accent-200);
-   }
-
-   /* Oculta as setas em navegadores modernos */
-    .qntd-produto::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-    appearance: none;
-}
 
    .text-title {
     justify-content: center;
@@ -279,24 +241,33 @@ header{
     color: var(--text-200);
    }
 
-   .card-button {
-    border: 1px solid var(--accent-100);
-    display: flex;
-    padding: 6px;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: .3s ease-in-out;
-   }
-
    .card-img:hover {
     transform: translateY(-3%);
     box-shadow: rgba(129, 129, 129, 0.7) 0px 8px 18px -5px;
    }
    
-   .card-button:hover {
+   .card-button{
+    width: 100%;
+    height: 40px;
+    background-color: none;
+    border: 1px solid var(--accent-100);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    color: var(--accent-100);
+    justify-content: center;
+    transition: all 0.3s ease;
+   }
+
+   .card-button span{
+    font-size: 16px;
+   }
+
+   .card-button:hover{
     border: 1px solid var(--accent-200);
     background-color: var(--accent-200);
-}
+    cursor: pointer;
+   }
 
 .aviso{
     display: flex;

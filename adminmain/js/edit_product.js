@@ -12,7 +12,7 @@ async function fetchProductDetails() {
     }
 
     
-        const response = await fetch(`get_product.php?id=${productId}`);
+        const response = await fetch(`php/get_product.php?id=${productId}`);
         const product = await response.json();
 
         ['nome', 'descricao', 'preco', 'estoque'].forEach(field => {
@@ -33,7 +33,7 @@ async function updateProduct() {
     dados.append('id', productId);
 
    
-    const response = await fetch('edit_product.php', {
+    const response = await fetch('php/edit_product.php', {
         method: 'POST',
         body: dados
     });

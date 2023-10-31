@@ -2,8 +2,8 @@
 
 session_start();  // Iniciando uma sessão para guardar info caso usuário seja autenticado
 
-// Declarando variáveis email e senha inseridos pelo usuário
-$email = $_POST['email'];
+// Declarando variáveis nome e senha inseridos pelo usuário
+$nome = $_POST['nome'];
 $senha = $_POST['senha'];
 
 // Conectando com o DB
@@ -16,21 +16,20 @@ if (!$connection){
 }
 
 // Condição que verifica se campos inseridos pelo usuário estão vazios
-if (empty($email) || empty($senha)){
+if (empty($nome) || empty($senha)){
     echo json_encode('Para realizar o login insira os dados nos campos abaixo');
     exit();
 }
 
 // Declarando a query a ser feita
-$query = "SELECT usuario_id, nome, email, senha FROM usuarios WHERE email = '$email' ";
+$query = "SELECT admin_id, admin_nome, admin_senha FROM admin WHERE admin_nome = '$nome' ";
 
 // Realizando a autenticação
 if ($result = mysqli_query($connection, $query)){
     if ($user = mysqli_fetch_assoc($result)){        
-        if (password_verify($senha, $user['senha'])){ 
-            $_SESSION["id"] = $user['usuario_id'];
-            $_SESSION["nome"] = $user['nome'];
-            $_SESSION['email'] = $email;
+        if ($senha == $user['admin_senha']){ 
+            $_SESSION["admin_id"] = $user['admin_id'];
+            $_SESSION["admin_nome"] = $user['admin_nome'];
             echo json_encode('Autenticado');
         }
         else{
@@ -38,7 +37,7 @@ if ($result = mysqli_query($connection, $query)){
         }
     }
     else{
-        echo json_encode("Email Incorreto");
+        echo json_encode("Nome Incorreto");
     }
 }
 else{

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/loginAdm.css">
     <meta charset="UTF-8">
-    <title>e-commerce login</title>
-    <script type="text/javascript" src="js/login.js"></script>
+    <title>login Adm</title>
+    <script type="text/javascript" src="js/loginAdm.js"></script>
 </head>
 <body>
     <div id="circle1" class="circles"></div>
@@ -12,18 +12,15 @@
     <div id="circle3" class="circles"></div>
     <div class="form-box">
         <form class="form" method="post" id='formdata'>
-            <span class="title">Login</span>
-            <span class="subtitle">Preencha os campos abaixos para logar em sua conta.</span>
+            <span class="title">Login Administrador</span>
+            <span class="subtitle">Preencha os campos abaixos para logar em sua conta de administrador.</span>
             <span id="mensagem-erro"></span>
             <div class="form-container" id="form-container">
-                <input type="email" class="input" placeholder="Email" id="email" name="email">
+                <input type="text" class="input" placeholder="Nome" id="nome" name="nome">
                 <input type="password" class="input" placeholder="Senha" id="senha" autocomplete="off" name="senha">
             </div>
             <button type="button" onclick="autenticar()">Entrar</button>
         </form>
-        <div class="form-section">
-            <p>Nao tem uma conta? <a href="../cadastro/cadastro.html">Cadastrar</a></p>
-        </div>
     </div>
 </body>
 </html>

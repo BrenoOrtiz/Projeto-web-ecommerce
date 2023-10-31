@@ -1,6 +1,6 @@
 window.onload = async function fetchData() {
     try {
-        const response = await fetch('product_maker.php', {
+        const response = await fetch('php/product_maker.php', {
             method: 'GET',
         });
 
@@ -69,7 +69,7 @@ function removeProduct(productId) {
     dados.append('id_produto', productId);
 
     confirmarBtn.addEventListener('click', async() => {
-        const response = await fetch('delete_product.php', {
+        const response = await fetch('php/delete_product.php', {
             method: 'POST',
             body: dados
             
