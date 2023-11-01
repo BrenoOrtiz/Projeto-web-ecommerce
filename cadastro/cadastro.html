@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="js/cadastro.js"></script>
-    <title>e-commerce cadastration</title>
+    <title>cadastro e-commerce</title>
 </head>
 
 <body>
@@ -15,23 +15,31 @@
     <div id="circle3" class="circles"></div>
     <div class="form-box">
         <form class="form" method="post" id='form'>
-            <span class="title">Sign up</span>
+            <span class="title">Cadastrar</span>
             <span class="subtitle">Crie uma conta gratis com seu email.</span>
-            <span id="mensagem-erro">O formulário não pode ser enviado. Por favor, preencha todos os campos obrigatórios.</span>
+            <span id="mensagem-erro"></span>
             <div class="form-container">
-                <input type="text" oninput="update(this)" class="input" placeholder="Nome completo" id="nome" autocomplete="off" name="nome" data-erro="erro-nome">
-                <span class="erro" id="erro-nome"></span>
-                <input type="email" oninput="update(this)" class="input" placeholder="Exemplo@email.com" id="email" name="email" data-erro="erro-email">
-                <span class="erro" id="erro-email"></span>
-                <input type="text" oninput="update(this)" class="input" placeholder="Senha" id="senha" autocomplete="off" name="senha" data-erro="erro-senha">
-                <span class="erro" id="erro-senha"></span>
-                <input type="text" oninput="update(this)" class="input" placeholder="CPF" id="cpf" maxlength="11" minlength="11" name="cpf" data-erro="erro-cpf">
-                <span class="erro" id="erro-cpf"></span>
+                <div class="input-container">
+                    <input type="text" oninput="update(this)" class="input" placeholder="Nome completo" id="nome" autocomplete="off" name="nome" data-erro="erro-nome">
+                    <span class="erro" id="erro-nome"></span>
+                </div>
+                <div class="input-container">
+                    <input type="email" oninput="update(this)" class="input" placeholder="Exemplo@email.com" id="email" name="email" data-erro="erro-email">
+                    <span class="erro" id="erro-email"></span>
+                </div>
+                <div class="input-container">
+                    <input type="text" oninput="update(this)" class="input" placeholder="Senha" id="senha" autocomplete="off" name="senha" data-erro="erro-senha">
+                    <span class="erro" id="erro-senha"></span>
+                </div>
+                <div class="input-container">
+                    <input type="text" oninput="update(this)" class="input" placeholder="CPF" id="cpf" maxlength="11" minlength="11" name="cpf" data-erro="erro-cpf">
+                    <span class="erro" id="erro-cpf"></span>
+                </div>
             </div>
             <button type="button" onclick="cadastrar()">Cadastrar</button>
         </form>
         <div class="form-section">
-            <p>Ja tem uma conta? <a href="../login/login.html">Log in</a> </p>
+            <p>Ja tem uma conta? <a href="../login/login.html">Log in</a></p>
         </div>
     </div>
 </body>

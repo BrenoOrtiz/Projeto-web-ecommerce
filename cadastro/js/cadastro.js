@@ -33,7 +33,7 @@ async function cadastrar() {
         if (!regexEmail.test(inputEmail.value)) {
             var erro = document.getElementById("erro-email");
             erro.style.display = "inline";
-            erro.textContent = "Este campo não é um endereço de email válido"
+            erro.textContent = "Endereço de email inválido"
             erro.style.animation = "erro 1s ease"
             inputEmail.style.outline = "1px solid #FF6347";
             isvalid = false;
@@ -57,7 +57,7 @@ async function cadastrar() {
 
         // Validando campo CPF
         var inputCPF = inputs[3];
-        var regexCPF = /^[0-9]{11}$/;
+        var regexCPF = /^[0-9]{11}$/; 
         if (!regexCPF.test(inputCPF.value)) {
             var erro = document.getElementById("erro-cpf");
             erro.style.display = "inline";
@@ -67,19 +67,38 @@ async function cadastrar() {
             isvalid = false;
         }
     } else {
-        document.querySelector('.form-container').style.outline = "1px solid #FF6347";
         var mensagem_erro = document.getElementById('mensagem-erro');
         mensagem_erro.style.display = "inline";
         mensagem_erro.style.animation = "erro 1s ease";
+        mensagem_erro.textContent = "O formulário não pode ser enviado. Por favor, preencha todos os campos obrigatórios."
     }
     
+    // Caso campos estejam validados realizar o fetch
     if (isvalid) {
         var formulario = document.getElementById("form");
         var dados = new FormData(formulario);
-        await fetch('php/cadastro.php', {
+        var promise = await fetch('php/cadastro.php', {
             method: 'POST',
             body: dados
         });
+
+        var response = await promise.json();
+        if (response == "Os Dados foram inseridos com sucesso") {
+            // Realizando login automaticamente se usuário realizou cadastro corretamente
+            await fetch('../login/php/login.php', {
+                method: 'POST',
+                body: dados
+            })
+            window.location.href = "../usermain/index.html";
+        } else {
+            // Mensagem erro quando email ou cpf ja estão cadastrados
+            var mensagem_erro = document.getElementById('mensagem-erro');
+            mensagem_erro.style.display = "inline";
+            mensagem_erro.style.animation = "erro 1s ease";
+            mensagem_erro.textContent = response;
+            
+        }
+
     }
        
 }

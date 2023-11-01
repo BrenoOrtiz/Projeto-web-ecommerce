@@ -1,8 +1,11 @@
+
+// Função que retorna o valor do parâmetro id da URL
 async function getProductIdFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('id');
 }
 
+// Função que recebe e coloca as informações do produto a ser editado em cada input do formulário
 async function fetchProductDetails() {
     const productId = await getProductIdFromURL();
     
@@ -21,6 +24,7 @@ async function fetchProductDetails() {
     
 }
 
+// Função que realiza o fetch de atualizar produto e mostra um popup com resposta do fetch
 async function updateProduct() {
     const productId = await getProductIdFromURL();
     if (!productId) {
@@ -50,6 +54,8 @@ async function updateProduct() {
 
 }
 
+
+// Implementação de fechar o popup de aviso
 var icon = document.getElementById('close-icon');
 icon.addEventListener('click', () => {
     var overlay = document.getElementById('all-content');

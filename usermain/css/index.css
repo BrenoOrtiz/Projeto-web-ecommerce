@@ -25,6 +25,7 @@ header{
 }
 
 .nav-container{
+    margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,7 +41,6 @@ header{
 
 .nav-links{
     position: relative;
-    min-width: 200px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -94,7 +94,7 @@ header{
     flex-direction: column;
     position: absolute;
     top: 50px;
-    right: 80px;
+    right: 5%;
     border-radius: 10px;
     padding: 12px;
     background-color: var(--bg-300);
@@ -168,6 +168,7 @@ header{
 
 #card-container{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 16px;
     padding: 32px;
@@ -328,3 +329,18 @@ header{
     }
 }
 
+
+@media only screen and (max-width:570px){
+    #logo{
+        display: none;
+    }
+
+    #menu-user, #menu-links{
+        right: 10px;
+    }
+
+    #search-input{
+        margin-left: 16px;
+        width: 200px;
+    }
+}

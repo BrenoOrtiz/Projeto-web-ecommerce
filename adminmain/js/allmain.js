@@ -1,3 +1,4 @@
+// Função que abre e fecha a sidebar das paginas adminmain
 function toggleSidebar() {
     var image = document.getElementById('menu-icon-content');
     var sidebar = document.getElementById('sidebar');
@@ -12,7 +13,7 @@ function toggleSidebar() {
     }
     
 }
-
+// função que verifica se o usuário admin está autenticado
 async function verificarAuth() {
     var promiseAuth = await fetch('php/verifyAuthAdm.php', {
         method: 'GET'
@@ -25,6 +26,7 @@ async function verificarAuth() {
 
 verificarAuth();
 
+// Função que desloga o usuário admin
 async function deslogar() {
     await fetch('php/logoutAdm.php', {
         method: 'GET'

@@ -86,52 +86,39 @@ body {
   .form-container {
     position: relative;
     border-radius: 8px;
-    background-color: #fff;
     margin: 1rem 0 .5rem;
     width: 100%;
   }
   
+  .input-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
   .input {
-    background: none;
+    background: #fff;
     border-radius: 8px;
     width: 222px;
     border: none;
-    outline: 0;
-    height: 40px;
+    outline: none;
+    height: 35px;
     font-size: .9rem;
     padding: 8px 15px;
+    margin-bottom: 8px;
+  }
+
+  .input:focus{
+    outline: 1px solid rgba(184,166,255,1);
   }
 
   .erro{
-    position: absolute;
-    border-radius: 4px 4px 4px 0;
     display: none;
-    height: 20px;
-    padding: 8px;
-    background-color: #FF6347;
-    white-space: nowrap;
+    color: #FF6347;
+    text-align: left;
     font-size: 14px;
+    align-self: flex-start;
   }
 
-  #erro-nome{
-    top: 0px;
-    left: 220px;
-  }
-
-  #erro-email{
-    top: 60px;
-    left: 220px;
-  }
-
-  #erro-senha{
-    top: 120px;
-    left: 220px;
-  }
-
-  #erro-cpf{
-    top: 180px;
-    left: 220px;
-  }
 
   .form-section {
     padding: 16px;
@@ -214,10 +201,10 @@ body {
   @keyframes erro {
     from{
       opacity: 0;
-      transform: translateX(25px);
+      transform: translateX(-20px);
     }
     to{
       opacity: 100%;
-      transform: translateX(0px);
+      transform: translateX(0);
     }
   }

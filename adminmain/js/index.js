@@ -1,6 +1,8 @@
+
+// Ao carregar toda a pagina roda a função que realiza o fetch para pegar os produtos na tabela
 window.onload = async function fetchData() {
     try {
-        const response = await fetch('php/product_maker.php', {
+        const response = await fetch('php/index.php', {
             method: 'GET',
         });
 
@@ -13,6 +15,7 @@ window.onload = async function fetchData() {
     }
 }
 
+// Função que retorna o HTML da tabela, recebe como parametro os produtos
 function generateTable(products) {
     let tableHTML = `
         <table>
@@ -53,6 +56,7 @@ function generateTable(products) {
     return tableHTML;
 }
 
+// Função que mostra popup de aviso e realiza o fetch de remover produto caso usuário confirme
 function removeProduct(productId) {
     var avisoContainer = document.querySelector('.aviso');
     var aviso = document.getElementById('aviso-text');
@@ -84,6 +88,7 @@ function removeProduct(productId) {
         
 }
 
+// Função que redireciona para pagina de editar produto e manda como parametro na URL o id do produto a ser editado
 async function editProduct(productId) {
     try {
 
@@ -93,6 +98,8 @@ async function editProduct(productId) {
     }
 }
 
+
+// Implementação de fechar o popup de aviso
 var icon = document.getElementById('close-icon');
 icon.addEventListener('click', () => {
     var overlay = document.getElementById('all-content');
