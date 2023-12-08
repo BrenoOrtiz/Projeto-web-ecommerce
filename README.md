@@ -1,4 +1,4 @@
-# Projeto web ecommerce por Joao Vitor Ishikawa Onofrio , Breno Ortiz David , Enzo Curcio Stival
+# Projeto web ecommerce por Joao Vitor Ishikawa Onofrio e Breno Ortiz David
 
 Projeto criado com o intuito de satisfazer os requerimentos da aula de WebDev do 2º período de bacharelado de Ciência da Computação.
 
