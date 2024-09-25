@@ -1,5 +1,3 @@
-
-// Realiza o fetch de criar produto no banco de dados e mostra um popup com a resposta do fetch
 async function create() {
     var form = document.getElementById('form');
     var dados = new FormData(form);
@@ -22,7 +20,6 @@ async function create() {
 
 }
 
-// Implementação de fechar o popup de aviso
 var icon = document.getElementById('close-icon');
 icon.addEventListener('click', () => {
     var overlay = document.getElementById('all-content');

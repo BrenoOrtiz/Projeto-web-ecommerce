@@ -1,5 +1,4 @@
-//Função para autenticar usuário
-async function autenticar() {
+async function autenticar(){
     var formulario = document.getElementById("formdata");
     var dados = new FormData(formulario);
     var promise = await fetch('php/login.php', {
