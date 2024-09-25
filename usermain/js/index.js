@@ -1,6 +1,5 @@
 window.onload = async function () {
     
-    // Função que recebe um produto e retorna o HTML com os dados do produto
     function createProductCard(product) {
         return `
         <div class="card">
@@ -22,7 +21,6 @@ window.onload = async function () {
     `;
     }
 
-    // fetch para pegar dados dos produtos
     var response = await fetch('php/index.php', {
         method: 'GET',
     });
@@ -30,14 +28,12 @@ window.onload = async function () {
     var dados = await response.json();
     var container = document.getElementById('card-container');
     
-    // Renderizar produtos ao carregar pagina
     dados.forEach((dado) => {
         var conteudo = createProductCard(dado);
         container.innerHTML += conteudo;
     });
 
     
-    // Função implementa funcionalidade do botao adicionar ao carrinho
     function addEventCart(){
         const cartButtons = document.querySelectorAll('.card-button');
         
@@ -79,7 +75,6 @@ window.onload = async function () {
     
     addEventCart();
     
-    // Implementação de fechar o popup de aviso
     var icon = document.getElementById('close-icon');
     icon.addEventListener('click', () => {
         var overlay = document.getElementById('all-content');
@@ -89,7 +84,6 @@ window.onload = async function () {
     })
 
 
-    // Implementação barra de procurar
     var search_input = document.getElementById('search-input');
     search_input.addEventListener('input', function busca(){
 
@@ -114,7 +108,7 @@ window.onload = async function () {
 
     })
 
-    // fetch dados do usuário autenticado
+
     var promiseUserData = await fetch('php/mostrarUser.php', {
         method: 'GET',
     });

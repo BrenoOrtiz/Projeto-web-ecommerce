@@ -1,6 +1,4 @@
-
-// Função que realiza o fetch de login do usuário admin e redireciona para pagina principal do admin caso autenticado
-async function autenticar() {
+async function autenticar(){
     var formulario = document.getElementById("formdata");
     var dados = new FormData(formulario);
     var promise = await fetch('php/loginAdm.php', {
@@ -13,7 +11,7 @@ async function autenticar() {
     var form_container = document.getElementById('form-container');
 
     if (response == 'Autenticado') { 
-        window.location.href = 'index.html';
+        window.location.href = 'product_maker.html';
     }
     else {
         mensagem_erro.textContent = response;

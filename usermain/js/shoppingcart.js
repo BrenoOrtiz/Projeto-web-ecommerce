@@ -145,11 +145,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (productCheckboxes[i].checked) {
                 var id_produto = productCheckboxes[i].getAttribute('data-id');
                 var produto = responseProdutos.find(produto => produto.produto_id === id_produto);
-                var quantidade = quantidadeInputs[i].value;
-                var preco = produto.preco * quantidade;
-
+                var quantidade = quantidadeInputs[i].value
+                var preco = produto.preco * quantidade
 
                 produtosSelecionados.push(produto);
+                produtosSelecionados[i].qntd_produto = quantidade;
 
                 itensSelecionados.innerHTML += `<div class="item"><p>X${quantidade} ${produto.nome}</p> <span>R$${preco}</span></div>`
                 valorTotal += parseFloat(preco);
@@ -253,11 +253,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             pagamentoModal.style.display = "flex";
             othercontent.style.opacity = "0.6"
         }
-
-        // Mudar a quantidade de produtos em cada produto selecionado antes da compra
-        for (var i = 0; i < produtosSelecionados.length; i++){
-            produtosSelecionados[i].qntd_produto = quantidadeInputs[i].value;
-        }
+        
     })
 
     var inptsFormaPag = document.querySelectorAll('.inpts-forma-pag');
