@@ -5,7 +5,7 @@ $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
 $email = $_POST['email'];
 $cpf = $_POST['cpf'];
 
-$connection = mysqli_connect('localhost', 'root', 'jv200405', 'ecommerce');  // USE SENHA DO SEU DB!!
+$connection = mysqli_connect('localhost', 'root', 'Bod12345:)Breno', 'ecommerce');  // USE SENHA DO SEU DB!!
 
 if (!$connection){
     echo "Connection error: " . mysqli_connect_error();
